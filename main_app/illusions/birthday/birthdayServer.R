@@ -1,3 +1,5 @@
+library("styler")
+style_file("birthdayServer.R")
 birthdayServer <- function(id) {
   moduleServer(
     id,

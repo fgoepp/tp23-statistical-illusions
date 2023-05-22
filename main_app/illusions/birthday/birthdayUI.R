@@ -1,3 +1,5 @@
+library("styler")
+style_file("birthdayUI.R")
 birthdayUI <- function(id) {
   ns <- NS(id)
   source("layout.R")
