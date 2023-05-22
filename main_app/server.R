@@ -1,9 +1,11 @@
+library("styler")
+style_file("server.R")
 server <- function(input, output) {
   # Calculate probability using formula
   output$probability <- renderText({
     N <- input$n
     c <- input$c
-    i <- 1:(N-1)
+    i <- 1:(N - 1)
     p <- 1 - prod(1 - i / c)
     paste0(sprintf("%.4f", p * 100), "%")
   })
