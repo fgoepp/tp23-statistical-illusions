@@ -1,4 +1,5 @@
 library("styler")
+library(shinydashboard)
 style_file("ui.R")
 ui <- dashboardPage(
   skin = "black",
