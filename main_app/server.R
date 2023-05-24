@@ -1,5 +1,7 @@
 library("styler")
-style_file("server.R")
+
+# styles the R files in the directory and in subdirectories
+style_dir()
 
 # call the scripts
 source("illusions/birthday/birthdayServer.R")

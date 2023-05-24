@@ -1,10 +1,8 @@
-library("styler")
 library(shinydashboard)
 
 # call the scripts
 source("illusions/birthday/birthdayUI.R")
 
-style_file("ui.R")
 ui <- dashboardPage(
   skin = "black",
 
