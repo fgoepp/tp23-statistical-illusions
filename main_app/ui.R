@@ -1,5 +1,9 @@
 library("styler")
 library(shinydashboard)
+
+# call the scripts
+source("illusions/birthday/birthdayUI.R")
+
 style_file("ui.R")
 ui <- dashboardPage(
   skin = "black",
@@ -87,20 +91,7 @@ ui <- dashboardPage(
         tabPanel(
           "Birthday Problem",
           h4("Birthday Problem"),
-          sidebarLayout(
-            sidebarPanel(
-              sliderInput("n", "Number of people:", min = 1, max = 200, value = 10),
-              sliderInput("c", "Number of categories:", min = 1, max = 365, value = 365),
-              downloadButton("download_plot", "Download Plot")
-            ),
-            mainPanel(
-              h4("Plot:"),
-              plotOutput("chicken"),
-              br(),
-              HTML("<h4>History</h4>"),
-              textOutput("text_description")
-            )
-          )
+          birthdayUI("birthday")
         )
       ),
 
