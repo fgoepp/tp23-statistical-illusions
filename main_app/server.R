@@ -1,4 +1,4 @@
-library("styler")
+library(styler)
 
 # styles the R files in the directory and in subdirectories
 style_dir()

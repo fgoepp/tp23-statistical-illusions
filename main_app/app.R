@@ -1,7 +1,6 @@
-library("shinydashboardPlus")
+library(shinydashboardPlus)
 library(ggplot2)
 library(shiny)
-library(shinydashboard)
 library(datasets)
 
 # sources

@@ -1,5 +1,3 @@
-library(shinydashboard)
-
 # call the scripts
 source("illusions/birthday/birthdayUI.R")
 
