@@ -1,33 +1,33 @@
+source("illusions/lindley/utils.R")
+library(BayesFactor)
 lindleyServer <- function(id) {
   moduleServer(id, function(input, output, session) {
-    # Calculate probability using formula
-    output$probability <- renderText({
-      i <- 1:(N - 1)
-      p <- 1 - prod(1 - i / input$c)
-      paste0(sprintf("%.4f", p * 100), "%")
+    # Create the binomial distributed data
+    # Attention: This data needs to be shared between multiple
+    # outputs so it needs to be created only once
+    data <- reactive({
+      create_data(input$n, input$p)
     })
 
-    output$chicken <- renderPlot({
+    # Print what each approach does with H0
+    output$accept_or_reject <- renderText({
+      #here 2 times paste
+      
+      paste("Bayesian: ", '<span style="color: red;">', get_unif_bayes_decision(data, input$H0_p), "</span>", sep = "")
+      paste("Frequentist: ", '<span style="color: green;">',
+        get_frequentist_decision(data, input$H0_p, input$significance_level), "</span>",
+        sep = ""
+      )
+    })
+
+    # Plot the data and the distributions
+    output$plot <- renderPlot({
       boxplot(weight ~ Diet, data = ChickWeight, xlab = "Diet", ylab = "Weight")
     })
 
+    # Explain text
     output$text_description <- renderText({
-      "Testen Sie ihre Implementierung, indem Sie vor der eigentlichen Berechnung As-
-        Sie, wenn Sie diese Darstellung gemäß IEEE 754 in eine Dezimalzahl übersetzen, ab der wie vielten Dezimalstelle sich die berechnete"
-      # You can customize the text above or generate it dynamically based on input values
+      paste("dei mudda")
     })
-
-    outputOptions(output, "chicken", suspendWhenHidden = FALSE)
-
-    output$download_plot <- downloadHandler(
-      filename = function() {
-        "plot.jpg"
-      },
-      content = function(file) {
-        jpeg(file)
-        print(boxplot(weight ~ Diet, data = ChickWeight, xlab = "Diet", ylab = "Weight"))
-        dev.off()
-      }
-    )
   })
 }
