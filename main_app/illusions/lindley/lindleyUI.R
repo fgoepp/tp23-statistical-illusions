@@ -6,7 +6,7 @@ lindleyUI <- function(id) {
   sideBarInput <- tagList(
     p("Assuming the actual data is binomial distributed. Please select the relevant paramenters"),
     # select actual data
-    sliderInput(ns("n"), "n:", min = 1, max = 100, value = 50),
+    sliderInput(ns("n"), "n:", min = 1, max = 10000, value = 5000),
     sliderInput(ns("p"), "p:", min = 0, max = 100, value = 50),
 
     # select significance level
