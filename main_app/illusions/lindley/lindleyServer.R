@@ -21,12 +21,15 @@ lindleyServer <- function(id) {
 
     # Print what each approach does with H0
     output$accept_or_reject <- renderText({
-      # here 2 times paste
-      get_frequentist_decision(data(), H0_p(), significance_level())
+      paste(
+        get_frequentist_decision(data(), H0_p(), significance_level()),
+        "\n", get_unif_bayes_decision(data(), H0_p())
+      )
     })
 
     # Plot the data and the distributions
     output$plot <- renderPlot({
+      plot_distributions_uniform(input$n, p(), data(), H0_p())
     })
 
     # Explain text

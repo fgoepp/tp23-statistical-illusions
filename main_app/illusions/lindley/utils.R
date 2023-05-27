@@ -10,7 +10,23 @@ create_data <- function(n, p) {
 # @param data: Binomial distributed data.
 # @param H0_p: The p chosen by the user.
 get_unif_bayes_decision <- function(data, H0_p) {
+  n <- length(data)
+  # how many hits there actually are
+  k <- sum(data[complete.cases(data)] == 1)
 
+  p_k_H0 <- choose(n, k) * H0_p^k * (1 - H0_p)^(n - k)
+  p_k_H1 <- 1 / (n + 1)
+
+  # 0,5 because prior the alternatives are set to be equal
+  p_H0_k <- (p_k_H0 * 0.5) / (p_k_H0 * 0.5 + p_k_H1 * 0.5)
+
+  decision <- ""
+
+  if (p_H0_k > 0.5) {
+    decision <- paste("H0 more likely ", "P(H0) ", p_H0_k)
+  } else {
+    decision <- paste("H1 more likely -> reject H0 ", "P(H0) ", p_H0_k)
+  }
 }
 
 
@@ -21,18 +37,13 @@ get_unif_bayes_decision <- function(data, H0_p) {
 get_frequentist_decision <- function(data, H0_p, significance_level) {
   # binomial approximated by gauß
 
-  # calculate values for gauß
-  n <- length(data)
-  mu <- n * H0_p
-  sigma_sq <- sqrt(n * H0_p * (1 - H0_p))
+  normal <- calc_normal_dist(data, H0_p)
+  n <- normal[1]
+  mu <- normal[2]
+  sigma_sq <- normal[3]
 
   # how many hits there actually are
   actual <- sum(data[complete.cases(data)] == 1)
-
-  print(paste("n: ", n))
-  print(paste("actual: ", actual))
-  print(paste("bis n; ", pnorm(n + 0.5, mean = mu, sd = sigma_sq)))
-  print(paste("bis actual; ", pnorm(actual - 0.5, mean = mu, sd = sigma_sq)))
 
   # calculate p-value
   p_val <- pnorm(n + 0.5, mean = mu, sd = sigma_sq) - pnorm(actual - 0.5, mean = mu, sd = sigma_sq)
@@ -46,4 +57,36 @@ get_frequentist_decision <- function(data, H0_p, significance_level) {
   }
 
   decision
+}
+
+plot_distributions_uniform <- function(n, p, data, H0_p) {
+  # specify what x-Axis
+  x <- seq(0, n, length.out = 1000)
+  # load normal dist
+  normal <- calc_normal_dist(data, H0_p)
+
+  y_H0 <- dnorm(x, mean = normal[2], sd = normal[3])
+
+  x_binomial <- 0:n
+  y_binomial <- dbinom(x_binomial, size = n, prob = p)
+
+  uniform <- dunif(x, min = 0, max = n)
+
+  plot(x, y_H0, type = "l", ylim = c(0, max(y_H0, y_binomial)), xlab = "x", ylab = "Density", col = "red")
+
+  # Plot H1
+  lines(x, uniform, col = "green", lwd = 2)
+
+  # Plot the binomial distribution
+  points(x_binomial, y_binomial, col = "blue")
+}
+
+# Change binomial into gauß
+calc_normal_dist <- function(data, H0_p) {
+  # calculate values for gauß
+  n <- length(data)
+  mu <- n * H0_p
+  sigma_sq <- sqrt(n * H0_p * (1 - H0_p))
+  vec <- c(n, mu, sigma_sq)
+  vec
 }
