@@ -2,6 +2,7 @@ library(shinydashboard)
 
 # call the scripts
 source("illusions/birthday/birthdayUI.R")
+source("illusions/lindley/lindleyUI.R")
 
 ui <- dashboardPage(
   skin = "black",
@@ -108,7 +109,7 @@ ui <- dashboardPage(
         tabPanel(
           "Lindley's Paradox",
           h4("Lindleys Paradox"),
-          p("text/plot here pls ")
+          lindleyUI("lindley")
         )
       ),
 
