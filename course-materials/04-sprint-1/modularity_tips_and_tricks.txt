@@ -1,0 +1,35 @@
+Tipps zum erstellen eines Moduls:
+
+	Server und UI Dateien erstellen, diese sollten seperat sein
+	(Kann tatsächlich zu Problemen führen, falls dies nicht eingehalten wird)
+
+	Die jeweilige Datei per source("file") in server.R bzw. ui.R für diese sichtbar machen
+
+	Von server.R/ui.R mit exampleServer("id")/exampleUI("id") aufrufen 
+	(!!! für id ein beliebiges aber konsistentes Wort eintragen, bspw. an beiden Stellen "1" oder "birthday"")
+
+	Namespace für exampleUI explizit angeben (!bedeutet jede Variable mit ns umschließen!) (, bei exampleServer ist diese implizit)
+	(Namespacing erlaubt es Variablennamen eindeutig einer Instanz eines Moduls zuzuordnen, 
+	wodurch mehrfache Nutzung eines Namens in seperaten Modulen möglich ist, 
+	wahrscheinlich werden wir bspw. alle eine Variable n nutzen wollen)
+
+	"Template"/Beispiel für exampleUI:
+
+exampleUI <- function(id) {
+  ns <- NS(id)
+
+  tagList(
+    selectInput(ns("var"), "Variable", choices = names(mtcars))
+  )
+}
+
+	"Template"/Beispiel für exampleServer:
+
+exampleServer <- function(id) {
+  moduleServer(id, function(input, output, session) {
+    data <- input$var
+  })
+}
+
+Quelle:
+https://mastering-shiny.org/scaling-modules.html#module-objects
