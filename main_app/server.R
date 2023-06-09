@@ -10,4 +10,5 @@ source("illusions/lindley/lindleyServer.R")
 server <- function(input, output) {
   birthdayServer("birthday")
   lindleyServer("lindley")
+  sbServer("sleepingbeauty")
 }

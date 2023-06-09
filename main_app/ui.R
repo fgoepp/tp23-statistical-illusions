@@ -3,6 +3,7 @@ library(shinydashboard)
 # call the scripts
 source("illusions/birthday/birthdayUI.R")
 source("illusions/lindley/lindleyUI.R")
+source("illusions/sleepingbeauty/sbUI.R")
 
 ui <- dashboardPage(
   skin = "black",
@@ -101,7 +102,7 @@ ui <- dashboardPage(
         tabPanel(
           "Sleeping Beauty Problem",
           h4("Sleeping Beauty Problem"),
-          p("text/plot here pls ")
+          sbUI("sleepingbeauty")
         )
       ),
       tabItem(
