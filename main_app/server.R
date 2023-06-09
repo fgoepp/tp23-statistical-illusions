@@ -6,6 +6,7 @@ style_dir()
 # call the scripts
 source("illusions/birthday/birthdayServer.R")
 source("illusions/lindley/lindleyServer.R")
+source("illusions/sleepingbeauty/sbServer.R")
 
 server <- function(input, output) {
   birthdayServer("birthday")
