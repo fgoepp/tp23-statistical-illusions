@@ -1,12 +1,12 @@
 sbUI <- function(id) {
   ns <- NS(id)
   source("layout.R")
-  
+
   fluidPage(
     tags$head(
       tags$link(rel = "stylesheet", href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css")
     ),
-    
+
     # Page 1: Introduction
     conditionalPanel(
       condition = "!input.page2_button",
@@ -24,7 +24,7 @@ sbUI <- function(id) {
         actionButton("page2_button", "Participate")
       )
     ),
-    
+
     # Page 2
     conditionalPanel(
       condition = "input.page2_button && !input.page3_button",
@@ -34,7 +34,7 @@ sbUI <- function(id) {
         actionButton("page3_button", "Next")
       )
     ),
-    
+
     # Page 3
     conditionalPanel(
       condition = "input.page3_button && !input.page4_button",
@@ -55,10 +55,10 @@ sbUI <- function(id) {
       ),
       actionButton("page4_button", "WAKE UP")
     ),
-    
-    
-    
-    
+
+
+
+
     # Page 4
     conditionalPanel(
       condition = "input.page4_button && !input.page5_button",
