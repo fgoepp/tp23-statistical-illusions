@@ -1,23 +1,44 @@
 birthdayServer <- function(id) {
   moduleServer(id, function(input, output, session) {
-    # Calculate probability using formula
-    output$probability <- renderText({
-      i <- 1:(N - 1)
-      p <- 1 - prod(1 - i / input$c)
-      paste0(sprintf("%.4f", p * 100), "%")
+    observeEvent(input$category_selector, {
+      if (input$category_selector == "birthday in a year") {
+        updateSliderInput(session, "c", value = 365, max = 400)
+      } else if (input$category_selector == "favourite planet of our solarsystem") {
+        updateSliderInput(session, "c", value = 8, max = 400)
+      } else if (input$category_selector == "favorite element of the periodic table") {
+        updateSliderInput(session, "c", value = 118, max = 118)
+      }
     })
 
-    output$chicken <- renderPlot({
-      boxplot(weight ~ Diet, data = ChickWeight, xlab = "Diet", ylab = "Weight")
+    calculateProbability <- function(n, c) {
+      probabilities <- sapply(1:n, function(i) {
+        p <- (1 - prod(1 - (0:(i - 1)) / c)) * 100
+        p
+      })
+      probabilities
+    }
+
+    output$probability_plot <- renderPlot({
+      n <- 1:input$n
+      c <- input$c
+      probabilities <- calculateProbability(input$n, c)
+      data <- data.frame(n = n, p = probabilities)
+      plot <- barplot(data$p, names.arg = data$n, main = "Probability Distribution", xlab = "Number of people", ylab = "Probability in %")
+      abline(h = (1 - prod(1 - (1:(input$n - 1)) / input$c)) * 100, col = "red", lwd = 2)
+      abline(h = 2, col = "green", lwd = 2)
+      plot
     })
 
+    # real probability
+    output$probability_text <- renderText({
+      paste0("Real probability: ", sprintf("%.4f", (1 - prod(1 - (1:(input$n - 1)) / input$c)) * 100), "%")
+    })
+
+
+    # Explanation
     output$text_description <- renderText({
-      "Testen Sie ihre Implementierung, indem Sie vor der eigentlichen Berechnung As-
-        Sie, wenn Sie diese Darstellung gemäß IEEE 754 in eine Dezimalzahl übersetzen, ab der wie vielten Dezimalstelle sich die berechnete"
-      # You can customize the text above or generate it dynamically based on input values
+      "history mistory etc"
     })
-
-    outputOptions(output, "chicken", suspendWhenHidden = FALSE)
 
     output$download_plot <- downloadHandler(
       filename = function() {
@@ -25,7 +46,11 @@ birthdayServer <- function(id) {
       },
       content = function(file) {
         jpeg(file)
-        print(boxplot(weight ~ Diet, data = ChickWeight, xlab = "Diet", ylab = "Weight"))
+        n <- 1:input$n
+        c <- input$c
+        probabilities <- calculateProbability(input$n, c)
+        data <- data.frame(n = n, p = probabilities)
+        barplot(data$p, names.arg = data$n, main = "Probability Distribution", xlab = "Person", ylab = "Probability")
         dev.off()
       }
     )
