@@ -89,6 +89,9 @@ plot_distributions_uniform <- function(n, p, data, H0_p) {
 
   # Plot the binomial distribution
   points(x_binomial, y_binomial, col = "blue")
+
+  # add explanation of distributions
+  legend("topleft", legend = c("Actual data", "Predicted by H0", "H1 of Bayesian"), col = c("blue", "red", "green"), lwd = 1)
 }
 
 # Change binomial into gauß

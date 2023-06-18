@@ -12,6 +12,11 @@ lindleyServer <- function(id) {
       input$p / 100
     })
 
+    observe({
+      # Change the maximum value of the slider of H0_p as it's a one sided test
+      updateSliderInput(session, "H0_p", max = input$p)
+    })
+
     # Create the binomial distributed data
     # Attention: This data needs to be shared between multiple
     # outputs so it needs to be created only once
@@ -47,7 +52,7 @@ lindleyServer <- function(id) {
 
     # Explain text
     output$text_description <- renderText({
-      paste("dei mudda")
+      paste("politically correct filler")
     })
   })
 }
