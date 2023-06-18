@@ -9,6 +9,7 @@ create_data <- function(n, p) {
 # Calculate bayes factor with H0 binomial and H1 uniform
 # @param data: Binomial distributed data.
 # @param H0_p: The p chosen by the user.
+# @output is a tuple with a boolean for text coloring and the fitting outputtext
 get_unif_bayes_decision <- function(data, H0_p) {
   n <- length(data)
   # how many hits there actually are
@@ -22,11 +23,16 @@ get_unif_bayes_decision <- function(data, H0_p) {
 
   decision <- ""
 
+  green_color <- FALSE
+
   if (p_H0_k > 0.5) {
     decision <- paste("H0 more likely ", "P(H0) ", p_H0_k)
+    green_color <- TRUE
   } else {
     decision <- paste("H1 more likely -> reject H0 ", "P(H0) ", p_H0_k)
   }
+
+  c(green_color, decision)
 }
 
 
@@ -34,6 +40,7 @@ get_unif_bayes_decision <- function(data, H0_p) {
 # @param data: Binomial distributed data.
 # @param H0_p: The p chosen by the user.
 # @param significance_level: The significance level chosen by the user.
+# @output is a tuple with a boolean for text coloring and the fitting outputtext
 get_frequentist_decision <- function(data, H0_p, significance_level) {
   # binomial approximated by gauß
 
@@ -50,13 +57,16 @@ get_frequentist_decision <- function(data, H0_p, significance_level) {
 
   decision <- ""
 
+  green_color <- FALSE
+
   if (p_val < significance_level) {
     decision <- paste("H0 rejected ", "p_val ", p_val, " < ", significance_level, " significance level")
   } else {
     decision <- paste("No significant rejection of H0 ", "p_val ", p_val, " > ", significance_level, " significance level")
+    green_color <- TRUE
   }
 
-  decision
+  c(green_color, decision)
 }
 
 plot_distributions_uniform <- function(n, p, data, H0_p) {

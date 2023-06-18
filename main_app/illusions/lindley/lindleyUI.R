@@ -26,7 +26,8 @@ lindleyUI <- function(id) {
 
   # mainPanel Output
   mainPanelOutput <- tagList(
-    textOutput(ns("accept_or_reject")),
+    uiOutput(ns("frequentist_decision")),
+    uiOutput(ns("bayesian_decision")),
     h4("The plotted data and the Distributions:"),
     plotOutput(ns("plot")),
     HTML("<h4>History</h4>"),

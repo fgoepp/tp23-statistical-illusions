@@ -19,13 +19,26 @@ lindleyServer <- function(id) {
       create_data(input$n, p())
     })
 
-    # Print what each approach does with H0
-    output$accept_or_reject <- renderText({
-      paste(
-        get_frequentist_decision(data(), H0_p(), significance_level()),
-        "\n", get_unif_bayes_decision(data(), H0_p())
-      )
+    # Print what the frequentist approach does with H0
+    output$frequentist_decision <- renderUI({
+      text_tuple <- get_frequentist_decision(data(), H0_p(), significance_level())
+      text_color <- "red"
+      if (text_tuple[1] == TRUE) {
+        text_color <- "green"
+      }
+      HTML(paste0("<span style='color:", text_color, "'>", text_tuple[2], "</span>"))
     })
+
+    # Print what the bayesian approach does with H0
+    output$bayesian_decision <- renderText({
+      text_tuple <- get_unif_bayes_decision(data(), H0_p())
+      text_color <- "red"
+      if (text_tuple[1] == TRUE) {
+        text_color <- "green"
+      }
+      HTML(paste0("<span style='color:", text_color, "'>", text_tuple[2], "</span>"))
+    })
+
 
     # Plot the data and the distributions
     output$plot <- renderPlot({
