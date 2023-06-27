@@ -18,8 +18,8 @@ lindleyUI <- function(id) {
 
     # select H_1 distribution
     p("this is relevant for Bayes, because here H0 and H1 are compared"),
-    selectInput("H1_dist", "H1 distribution:",
-      choices = c("Uniform", "Option 2", "Option 3"),
+    selectInput(ns("H1_dist"), "H1 distribution:",
+      choices = c("Uniform", "Uniform & different H0"),
       selected = "Uniform"
     )
   )

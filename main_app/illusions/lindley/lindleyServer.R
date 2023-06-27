@@ -17,6 +17,24 @@ lindleyServer <- function(id) {
       updateSliderInput(session, "H0_p", max = input$p)
     })
 
+    # to access option val init
+    uniform <- reactiveVal(TRUE)
+
+    # H1 swap
+    selected_option <- reactive({
+      input$H1_dist
+    })
+
+    observe({
+      option_value <- selected_option()
+      if (option_value == "Uniform") {
+        uniform(TRUE)
+      } else {
+        uniform(FALSE)
+      }
+    })
+
+
     # Create the binomial distributed data
     # Attention: This data needs to be shared between multiple
     # outputs so it needs to be created only once
@@ -36,7 +54,7 @@ lindleyServer <- function(id) {
 
     # Print what the bayesian approach does with H0
     output$bayesian_decision <- renderText({
-      text_tuple <- get_unif_bayes_decision(data(), H0_p())
+      text_tuple <- get_bayes_decision(data(), H0_p(), uniform())
       text_color <- "red"
       if (text_tuple[1] == TRUE) {
         text_color <- "green"
@@ -47,7 +65,7 @@ lindleyServer <- function(id) {
 
     # Plot the data and the distributions
     output$plot <- renderPlot({
-      plot_distributions_uniform(input$n, p(), data(), H0_p())
+      plot_distributions(input$n, p(), data(), H0_p(), uniform())
     })
 
     # Explain text
