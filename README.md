@@ -1,5 +1,6 @@
 # tp23-statistical-illusions# 
-
+# Introduction
+bla bli blup
 # Getting Started
 
 ## 1. Installing R
