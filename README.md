@@ -1,7 +1,7 @@
 # tp23-statistical-illusions# 
 [![Contributors][contributors-shield]][contributors-url]
 [![Pull-Requests][pr-shield]][pr-url]
-[![Issues][issues-shield]][[issues-url]
+[![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
 
 [contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=for-the-badge
