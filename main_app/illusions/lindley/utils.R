@@ -27,17 +27,17 @@ get_bayes_decision <- function(data, H0_p, uniform) {
   p_k_H1 <- get_H1_bayes(uniform, length(data), k, H0_p, n)
 
   # 0,5 because prior the alternatives are set to be equal
-  p_H0_k <- (p_k_H0 * 0.5) / (p_k_H0 * 0.5 + p_k_H1 * 0.5)
+  p_H0_k <- round((p_k_H0 * 0.5) / (p_k_H0 * 0.5 + p_k_H1 * 0.5), digits = 2)
 
   decision <- ""
 
   green_color <- FALSE
 
   if (p_H0_k > 0.5) {
-    decision <- paste("H0 more likely ", "P(H0) ", p_H0_k)
+    decision <- paste("H₀ more likely ", "P(H₀) ", p_H0_k)
     green_color <- TRUE
   } else {
-    decision <- paste("H1 more likely -> reject H0 ", "P(H0) ", p_H0_k)
+    decision <- paste("H₁ more likely -> reject H₀ ", "P(H₀) ", p_H0_k)
   }
 
   c(green_color, decision)
@@ -56,8 +56,9 @@ get_H1_bayes <- function(uniform, count_samples, hits, H0_p, n) {
     # for uniform
     p_k_H1 <- 1 / (n + 1)
   } else {
-    # for uniform H1: theta < H0_p
-    p_k_H1 <- pbeta(H0_p, hits, count_samples - hits)
+    # for uniform H1: theta < 0,5
+
+    p_k_H1 <- pbeta(1, hits, count_samples - hits) - pbeta(0.5, hits, count_samples - hits)
   }
   p_k_H1
 }
@@ -79,16 +80,16 @@ get_frequentist_decision <- function(data, H0_p, significance_level) {
   actual <- sum(data[complete.cases(data)] == 1)
 
   # calculate p-value
-  p_val <- pnorm(n + 0.5, mean = mu, sd = sigma_sq) - pnorm(actual - 0.5, mean = mu, sd = sigma_sq)
+  p_val <- round(pnorm(n + 0.5, mean = mu, sd = sigma_sq) - pnorm(actual - 0.5, mean = mu, sd = sigma_sq), digits = 2)
 
   decision <- ""
 
   green_color <- FALSE
 
   if (p_val < significance_level) {
-    decision <- paste("H0 rejected ", "p_val ", p_val, " < ", significance_level, " significance level")
+    decision <- paste("H₀ rejected ", "p_val ", p_val, " < ", significance_level, " significance level")
   } else {
-    decision <- paste("No significant rejection of H0 ", "p_val ", p_val, " > ", significance_level, " significance level")
+    decision <- paste("No significant rejection of H₀ ", "p_val ", p_val, " > ", significance_level, " significance level")
     green_color <- TRUE
   }
 
@@ -117,7 +118,7 @@ plot_distributions <- function(n, p, data, H0_p, uniform) {
   points(x_binomial, y_binomial, col = "blue")
 
   # add explanation of distributions
-  legend("topleft", legend = c("Actual data", "Predicted by H0", "H1 of Bayesian"), col = c("blue", "red", "green"), lwd = 1)
+  legend("topleft", legend = c("Actual data", "Predicted by H₀", "H₁ of Bayesian"), col = c("blue", "red", "green"), lwd = 1)
 }
 
 get_H1_plot <- function(uniform, x, H0_p, n) {
