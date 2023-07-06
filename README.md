@@ -1,5 +1,5 @@
 # tp23-statistical-illusions# 
-[<img src="https://github.com/fgoepp/tp23-statistical-illusions/raw/new_readme_getstarted/main_app/www/illusion.jpeg" width="300" height="200"/>](https://github.com/fgoepp/tp23-statistical-illusions)
+[<img src="https://github.com/fgoepp/tp23-statistical-illusions/raw/new_readme_getstarted/main_app/www/illusion.jpeg" width="200" height="133"/>](https://github.com/fgoepp/tp23-statistical-illusions)
 
 
 # Introduction
