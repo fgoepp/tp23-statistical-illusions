@@ -1,17 +1,4 @@
 # tp23-statistical-illusions# 
-[![Contributors][contributors-shield]][contributors-url]
-[![Pull-Requests][pr-shield]][pr-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-
-[contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=for-the-badge
-[contributors-url]: https://github.com/fgoepp/tp23-statistical-illusions/graphs/contributors
-[pr-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
-[pr-url]: https://github.com/fgoepp/tp23-statistical-illusions/pulls
-[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
-[issues-url]: https://github.com/fgoepp/tp23-statistical-illusions/issues
-[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
-[license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
 
 # Getting Started
 
