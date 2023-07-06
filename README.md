@@ -1,4 +1,7 @@
 # tp23-statistical-illusions# 
+[![Repository-Bild](https://github.com/fgoepp/tp23-statistical-illusions/raw/new_readme_getstarted/main_app/www/illusion.jpeg)](https://github.com/fgoepp/tp23-statistical-illusions)
+
+
 # Introduction
 bla bli blup
 # Getting Started
