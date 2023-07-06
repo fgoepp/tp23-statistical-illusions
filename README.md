@@ -1,4 +1,10 @@
 # tp23-statistical-illusions# 
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![MIT License][license-shield]][license-url]
+[![LinkedIn][linkedin-shield]][linkedin-url]
 
 # Getting Started
 
@@ -19,8 +25,9 @@
 
 ### Download with git:
 - Open your Terminal/Console and enter:
-- 
-> git clone git@github.com:fgoepp/tp23-statistical-illusions.git
+```sh
+   git clone git@github.com:fgoepp/tp23-statistical-illusions.git
+```
 
 ### Download Repository manually:
 - Click on <> Code (green Button).
