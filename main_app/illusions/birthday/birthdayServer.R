@@ -1,13 +1,14 @@
 source("illusions/birthday/utils.R")
 birthdayServer <- function(id) {
   moduleServer(id, function(input, output, session) {
+    #reactive values
     n_reac <- reactive({
       input$n
     })
     c_reac <- reactive({
       input$c
     })
-
+    
     isGuessState <- function() {
       return(n_reac() == 70 && c_reac() == 365)
     }
@@ -29,6 +30,7 @@ birthdayServer <- function(id) {
       probabilities_bday2 <- calculateProbabilityBday(input$n, input$c, "first_prob")
 
       data <- data.frame(n = n, p1 = probabilities_bday1, p2 = probabilities_bday2)
+      
       # guesses data
       if (isGuessState()) {
         first_guess_data <- data.frame(
