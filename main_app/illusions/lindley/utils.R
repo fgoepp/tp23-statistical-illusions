@@ -19,15 +19,8 @@ hits_data <- function(data) {
 # @param uniform: Boolean to choose type of H1.
 # @output is a tuple with a boolean for text coloring and the fitting outputtext.
 get_bayes_decision <- function(data, H0_p, uniform) {
-  n <- length(data)
-  # how many hits there actually are
-  k <- hits_data(data)
-
-  p_k_H0 <- choose(n, k) * H0_p^k * (1 - H0_p)^(n - k)
-  p_k_H1 <- get_H1_bayes(uniform, length(data), k, H0_p, n)
-
-  # 0,5 because prior the alternatives are set to be equal
-  p_H0_k <- round((p_k_H0 * 0.5) / (p_k_H0 * 0.5 + p_k_H1 * 0.5), digits = 2)
+  # calculate p_H0_k depending on priors
+  p_H0_k <- get_H0_bayes(data, H0_p, uniform)
 
   decision <- ""
 
@@ -50,17 +43,27 @@ get_bayes_decision <- function(data, H0_p, uniform) {
 # @param hits: Hits in binomial data.
 # @param H0_p: The p chosen by the user for H0.
 # @param n: Length of data.
-get_H1_bayes <- function(uniform, count_samples, hits, H0_p, n) {
-  p_k_H1 <- -1
-  if (uniform == TRUE) {
-    # for uniform
-    p_k_H1 <- 1 / (n + 1)
-  } else {
-    # for uniform H1: theta < 0,5
+get_H0_bayes <- function(data, H0_p, uniform) {
+  p_H0_k <- -1
 
-    p_k_H1 <- pbeta(1, hits, count_samples - hits) - pbeta(0.5, hits, count_samples - hits)
+  n <- length(data)
+  # how many hits there actually are
+  k <- hits_data(data)
+
+  if (uniform == TRUE) {
+    p_k_H0 <- choose(n, k) * H0_p^k * (1 - H0_p)^(n - k)
+    p_k_H1 <- 1 / (n + 1)
+
+    # 0,5 because prior the alternatives are set to be equal
+    p_H0_k <- (p_k_H0 * 0.5) / (p_k_H0 * 0.5 + p_k_H1 * 0.5)
+  } else {
+    # for both uniform
+    p_H0_k <- pbeta(H0_p, k + 1, n - k + 1) - pbeta(0, k + 1, n - k + 1)
   }
-  p_k_H1
+  # round values
+  p_H0_k <- round(p_H0_k, digits = 2)
+  # return p_H0_k
+  p_H0_k
 }
 
 # Calculates frequentist approach with one sided binomial test for H0
@@ -118,13 +121,22 @@ plot_distributions <- function(n, p, data, H0_p, uniform) {
   points(x_binomial, y_binomial, col = "blue")
 
   # add explanation of distributions
-  legend("topleft", legend = c("Actual data", "Predicted by H₀", "H₁ of Bayesian"), col = c("blue", "red", "green"), lwd = 1)
+  legend("topleft",
+    legend = c(
+      "Actual data",
+      bquote("Predicted by H"[0]),
+      bquote("H"[1] ~ "of Bayesian")
+    ),
+    col = c("blue", "red", "green"), lwd = 1
+  )
 }
 
 get_H1_plot <- function(uniform, x, H0_p, n) {
   H1_plot <- dunif(x, min = 0, max = n)
   if (uniform == FALSE) {
     H1_plot <- dunif(x, min = 0, max = n * H0_p)
+  } else {
+
   }
   H1_plot
 }
