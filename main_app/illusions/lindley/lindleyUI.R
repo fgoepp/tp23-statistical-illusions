@@ -7,19 +7,19 @@ lindleyUI <- function(id) {
     p("Assuming the actual data is binomial distributed. Please select the relevant parameters"),
     # select actual data
     sliderInput(ns("n"), "n:", min = 1, max = 1000, value = 1000),
-    sliderInput(ns("p"), "p:", min = 0, max = 100, value = 50),
+    sliderInput(ns("p"), "p:", min = 1, max = 99, value = 50),
 
     # select significance level
     sliderInput(ns("significance_level"), "significance level in %:", min = 0, max = 100, value = 5),
 
     # select H_0 distribution
-    p("The distribution of H0 is assumed to be binomial. Please select the probability"),
-    sliderInput(ns("H0_p"), "H0 ratio:", min = 0, max = 100, value = 47),
+    p("The distribution of H₀ is assumed to be binomial. Please select the probability"),
+    sliderInput(ns("H0_p"), "H₀ ratio:", min = 1, max = 100, value = 47),
 
     # select H_1 distribution
-    p("this is relevant for Bayes, because here H0 and H1 are compared"),
-    selectInput("H1_dist", "H1 distribution:",
-      choices = c("Uniform", "Option 2", "Option 3"),
+    p("this is relevant for Bayes, because here H₀ and H₁ are compared"),
+    selectInput(ns("H1_dist"), "H₁ distribution:",
+      choices = c("Uniform", "Uniform & different H₀"),
       selected = "Uniform"
     )
   )

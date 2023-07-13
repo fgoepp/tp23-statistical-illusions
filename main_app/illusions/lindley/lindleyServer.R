@@ -13,9 +13,31 @@ lindleyServer <- function(id) {
     })
 
     observe({
-      # Change the maximum value of the slider of H0_p as it's a one sided test
-      updateSliderInput(session, "H0_p", max = input$p)
+      if (uninfo() == TRUE) {
+        # Change the maximum value of the slider of H0_p as it's a one sided test
+        updateSliderInput(session, "H0_p", max = input$p)
+      } else {
+        updateSliderInput(session, "H0_p", max = 100)
+      }
     })
+
+    # to access option val init
+    uninfo <- reactiveVal(TRUE)
+
+    # H1 swap
+    selected_option <- reactive({
+      input$H1_dist
+    })
+
+    observe({
+      option_value <- selected_option()
+      if (option_value == "Uniform") {
+        uninfo(TRUE)
+      } else {
+        uninfo(FALSE)
+      }
+    })
+
 
     # Create the binomial distributed data
     # Attention: This data needs to be shared between multiple
@@ -36,7 +58,7 @@ lindleyServer <- function(id) {
 
     # Print what the bayesian approach does with H0
     output$bayesian_decision <- renderText({
-      text_tuple <- get_unif_bayes_decision(data(), H0_p())
+      text_tuple <- get_bayes_decision(data(), H0_p(), uninfo())
       text_color <- "red"
       if (text_tuple[1] == TRUE) {
         text_color <- "green"
@@ -47,7 +69,7 @@ lindleyServer <- function(id) {
 
     # Plot the data and the distributions
     output$plot <- renderPlot({
-      plot_distributions_uniform(input$n, p(), data(), H0_p())
+      plot_distributions(input$n, p(), data(), H0_p(), uninfo())
     })
 
     # Explain text
