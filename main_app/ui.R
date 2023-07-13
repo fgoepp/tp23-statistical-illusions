@@ -4,6 +4,7 @@ library(shinydashboard)
 source("illusions/birthday/birthdayUI.R")
 source("illusions/lindley/lindleyUI.R")
 source("illusions/sleepingbeauty/sbUI.R")
+source("mainPage/mainPUI.R")
 
 ui <- dashboardPage(
   skin = "black",
@@ -71,7 +72,7 @@ ui <- dashboardPage(
         tabPanel(
           "Main Page",
           h4("Main Page"),
-          p("text/plot here pls ")
+          mainPUI("mainPage")
         )
       ),
 

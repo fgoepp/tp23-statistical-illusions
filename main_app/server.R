@@ -7,9 +7,11 @@ style_dir()
 source("illusions/birthday/birthdayServer.R")
 source("illusions/lindley/lindleyServer.R")
 source("illusions/sleepingbeauty/sbServer.R")
+source("mainPage/mainPServer.R")
 
 server <- function(input, output) {
   birthdayServer("birthday")
   lindleyServer("lindley")
   sbServer("sleepingbeauty")
+  mainPServer("mainPage")
 }
