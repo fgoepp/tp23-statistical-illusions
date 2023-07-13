@@ -2,10 +2,12 @@ birthdayUI <- function(id) {
   ns <- NS(id)
 
   fluidPage(
-    # for coloring probabilty_text and guess_text
+    # for coloring probability_text and guess_text
     tags$head(
-      tags$style(HTML(".instruction {color: red;}.first-answer {color: darkgreen;}.second-answer {color: darkblue;}.your-first-guess {color: darkgreen;}.your-second-guess {color: darkblue;}"))
+      tags$style(HTML(".sec-prob {color: darkblue}.instruction {color: red;}.first-answer {color: darkgreen;}.second-answer {color: darkblue;}.your-first-guess {color: darkgreen;}.your-second-guess {color: darkblue;}"))
     ),
+    tags$script(src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"),
+
 
     # Page 1: Introduction
     conditionalPanel(
@@ -64,22 +66,34 @@ birthdayUI <- function(id) {
             tagList(
               plotOutput(ns("probability_plot")),
               tags$h4("The dark-grey (lower) distribution", style = "font-weight: bold;"),
-              textOutput(ns("first_question_text")),
-              textOutput(ns("first_distribution")),
-              textOutput(ns("n_and_c_first")),
-              tags$span(textOutput(ns("first_answer_text")), class = "first-answer"),
-              tags$span(textOutput(ns("first_guess_text")), class = "your-first-guess"),
+              textOutput(ns("text_first_question")),
+              textOutput(ns("text_first_distribution")),
+              textOutput(ns("text_n_and_c_first")),
+              tags$span(textOutput(ns("text_first_answer")), class = "first-answer"),
+              tags$span(textOutput(ns("text_first_guess")), class = "your-first-guess"),
               tags$h4("The light-grey (upper) distribution", style = "font-weight: bold;"),
-              textOutput(ns("second_question_text")),
-              textOutput(ns("second_distribution")),
-              textOutput(ns("n_and_c_second")),
-              tags$span(textOutput(ns("second_answer_text")), class = "second-answer"),
-              tags$span(textOutput(ns("second_guess_text")), class = "your-second-guess"),
+              textOutput(ns("text_second_question")),
+              textOutput(ns("text_second_distribution")),
+              textOutput(ns("text_n_and_c_second")),
+              tags$span(textOutput(ns("text_second_answer")), class = "second-answer"),
+              tags$span(textOutput(ns("text_second_guess")), class = "your-second-guess"),
+              tags$span(textOutput(ns("text_second_prob")), class = "sec-prob"),
               tags$span(textOutput(ns("text_instruction_sliders")), class = "instruction"),
               tags$span(textOutput(ns("text_instruction_goback")), class = "instruction"),
               br(),
               HTML("<h4>History</h4>"),
-              textOutput(ns("text_description"))
+              a(href = "https://github.com/fgoepp/tp23-statistical-illusions", "Our Github"),
+              a(
+                href = "https://github.com/fgoepp/tp23-statistical-illusions",
+                style = "color: blue; text-decoration: underline;",
+                "https://github.com/fgoepp/tp23-statistical-illusions"
+              ),
+              div(
+                HTML("This is the summation symbol: $$\\sum_{i=1}^{n} i$$"),
+                HTML("This is the product symbol: $$\\prod_{i=1}^{n} x_i$$"),
+                HTML("Here is something under the square root: $$\\sqrt{4x^{7}}$$"),
+                HTML("Here is an integral with a sine function: $$\\int_{a}^{b} \\sin(x) \\, dx$$")
+              )
             )
           )
         )
