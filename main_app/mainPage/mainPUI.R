@@ -18,7 +18,7 @@ mainPUI <- function(id) {
             "Overview",
             # Overview section
             h2("Overview: Unveiling Statistical Illusions"),
-            p("This app presents a collection of statistical illusions and paradoxes."),
+            p("This app presents a collection of the following statistical illusions and paradoxes."),
             tags$ol(
               tags$li(
                 h4("Gambler's Fallacy"),
