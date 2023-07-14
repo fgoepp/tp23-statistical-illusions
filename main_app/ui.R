@@ -7,21 +7,21 @@ source("illusions/sleepingbeauty/sbUI.R")
 
 ui <- dashboardPage(
   skin = "black",
-
+  
   # Header
   dashboardHeader(
     title = "?"
   ),
-
+  
   # Sidebar
   dashboardSidebar(
-
+    
     # Sidebar menu
     sidebarMenu(
-
+      
       # Sidebar menu items
       menuItem("MainPage", tabName = "main_tab", icon = icon("home")),
-
+      
       # Illusions submenu
       menuItem(
         "Illusions",
@@ -47,24 +47,16 @@ ui <- dashboardPage(
           icon = icon("chart-area")
         ),
         expand = TRUE # Make the submenu expandable
-      ),
-      menuItem("MetaPage", tabName = "meta_tab", icon = icon("info-circle")),
-
-      # Settings
-      menuItem(
-        icon = icon("gear"),
-        tabName = "settings_tab",
-        "Settings"
       )
     )
   ),
-
+  
   # Body
   dashboardBody(
-
+    
     # Tab items
     tabItems(
-
+      
       # Main tab item
       tabItem(
         tabName = "main_tab",
@@ -74,7 +66,7 @@ ui <- dashboardPage(
           p("text/plot here pls ")
         )
       ),
-
+      
       # Monte Carlo Fallacy tab item
       tabItem(
         tabName = "mc_fallacy_tab",
@@ -84,7 +76,7 @@ ui <- dashboardPage(
           p("text/plot here pls ")
         )
       ),
-
+      
       # Birthday Problem tab item
       tabItem(
         tabName = "birthday_tab",
@@ -94,8 +86,7 @@ ui <- dashboardPage(
           birthdayUI("birthday")
         )
       ),
-
-
+      
       # Sleeping Beauty Problem tab item
       tabItem(
         tabName = "sleeping_tab",
@@ -112,33 +103,8 @@ ui <- dashboardPage(
           h4("Lindleys Paradox"),
           lindleyUI("lindley")
         )
-      ),
-
-      # Meta tab item
-      tabItem(
-        tabName = "meta_tab",
-        tabPanel(
-          "Meta Page",
-          h4("Meta Page"),
-          p("text here pls ")
-        )
-      ),
-
-      # Settings tab item
-      tabItem(
-        tabName = "settings_tab",
-        fluidRow(
-          box(
-            title = "Settings",
-            selectInput(
-              "color_selector",
-              label = "Choose a color",
-              choices = c("red", "yellow", "blue", "green", "navy", "orange", "purple", "maroon", "black"),
-              selected = "black"
-            )
-          )
-        )
       )
     )
   )
 )
+
