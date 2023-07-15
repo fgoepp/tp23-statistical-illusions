@@ -1,3 +1,4 @@
+library(testthat)
 # Calculates one prababilities for distribution one or two
 # @param n: number of people (int)
 # @param c: number of category (int)
@@ -89,7 +90,7 @@ test_that("calculateNBday calculates the number of people correctly for known in
   # Test case 1: Same birthday as you
   expect_equal(calculateNBday(0, 365, "first_prob"), 0)
   expect_equal(calculateNBday(0.7, 365, "first_prob"), 439)
-  
+
   # Test case 2: Classic birthday problem (2 or more matches)
   expect_equal(calculateNBday(0.5, 365, "second_prob"), 23)
   expect_equal(calculateNBday(0, 365, "second_prob"), 1)

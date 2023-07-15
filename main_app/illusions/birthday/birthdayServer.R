@@ -1,14 +1,14 @@
 source("illusions/birthday/utils.R")
 birthdayServer <- function(id) {
   moduleServer(id, function(input, output, session) {
-    #reactive values
+    # reactive values
     n_reac <- reactive({
       input$n
     })
     c_reac <- reactive({
       input$c
     })
-    
+
     isGuessState <- function() {
       return(n_reac() == 70 && c_reac() == 365)
     }
@@ -30,7 +30,7 @@ birthdayServer <- function(id) {
       probabilities_bday2 <- calculateProbabilityBday(input$n, input$c, "first_prob")
 
       data <- data.frame(n = n, p1 = probabilities_bday1, p2 = probabilities_bday2)
-      
+
       # guesses data
       if (isGuessState()) {
         first_guess_data <- data.frame(
@@ -80,10 +80,21 @@ birthdayServer <- function(id) {
         first_guess <- as.numeric(input$first_guess_input)
         if (!is.null(input$first_guess_input) && !is.na(first_guess) && first_guess >= 0 && first_guess <= 100) {
           # Point for the first guess if it's valid
+          output$text_first_guess <- renderText({
+            if (isGuessState()) {
+              paste0(
+                "your first guess: ",
+                sprintf("%s%%", input$first_guess_input),
+                " (guess would be correct for: ", calculateNBday((input$first_guess_input / 100), input$c, "first_prob"), " people)"
+              )
+            }
+          })
           points(first_guess_data$x, first_guess_data$y, lwd = 3, col = "darkgreen", pch = 4)
         } else {
-          output$first_guess_text <- renderText({
-            "Invalid guess input. Please enter a number between 0 and 100."
+          output$text_first_guess <- renderText({
+            if (isGuessState()) {
+              "Invalid guess input. Please enter a number between 0 and 100."
+            }
           })
         }
 
@@ -91,10 +102,21 @@ birthdayServer <- function(id) {
         second_guess <- as.numeric(input$second_guess_input)
         if (!is.null(input$second_guess_input) && !is.na(second_guess) && second_guess >= 0 && second_guess <= 100) {
           # Point for the second guess if it's valid
+          output$text_second_guess <- renderText({
+            if (isGuessState()) {
+              paste0(
+                "your second guess: ",
+                sprintf("%s%%", input$second_guess_input),
+                " (guess would be correct for: ", calculateNBday((input$second_guess_input / 100), input$c, "second_prob"), " people)"
+              )
+            }
+          })
           points(second_guess_data$x, second_guess_data$y, lwd = 3, col = "darkblue", pch = 4)
         } else {
-          output$second_guess_text <- renderText({
-            "Invalid guess input. Please enter a number between 0 and 100."
+          output$text_second_guess <- renderText({
+            if (isGuessState()) {
+              "Invalid guess input. Please enter a number between 0 and 100."
+            }
           })
         }
       }
@@ -149,28 +171,12 @@ birthdayServer <- function(id) {
         )
       }
     })
-    output$text_first_guess <- renderText({
-      if (isGuessState()) {
-        paste0(
-          "your first guess: ",
-          sprintf("%s%%", input$first_guess_input),
-          " (guess would be correct for: ", calculateNBday((input$first_guess_input / 100), input$c, "first_prob"), " people)"
-        )
-      }
-    })
+
     output$text_first_answer <- renderText({
       probability <- calculateProbabilityBday(input$n, input$c, "first_prob")[input$n]
       paste0("probability = ", sprintf("%.4f", probability), "%")
     })
-    output$text_second_guess <- renderText({
-      if (isGuessState()) {
-        paste0(
-          "your second guess: ",
-          sprintf("%s%%", input$second_guess_input),
-          " (guess would be correct for: ", calculateNBday((input$second_guess_input / 100), input$c, "second_prob"), " people)"
-        )
-      }
-    })
+
     output$text_second_answer <- renderText({
       if (isGuessState()) {
         probability <- calculateProbabilityBday(input$n, input$c, "second_prob")[40]
