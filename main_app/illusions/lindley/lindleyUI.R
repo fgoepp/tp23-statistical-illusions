@@ -14,7 +14,7 @@ lindleyUI <- function(id) {
 
     # select H_0 distribution
     p("The distribution of H₀ is assumed to be binomial. Please select the estimation for the probability"),
-    sliderInput(ns("H0_p"), "H₀ ratio:", min = 1, max = 100, value = 47),
+    sliderInput(ns("H0_p"), "H₀ ratio:", min = 1, max = 99, value = 47),
 
     # select H_1 distribution
     p("this is relevant for Bayes, because here H₀ and H₁ are compared"),
