@@ -66,24 +66,19 @@ get_H0_bayes <- function(data, H0_p, uninfo) {
   p_H0_k
 }
 
-# Calculates frequentist approach with one sided binomial test for H0
+# Calculates frequentist approach with two sided binomial test for H0
 # @param data: Binomial distributed data.
 # @param H0_p: The p chosen by the user.
 # @param significance_level: The significance level chosen by the user.
 # @output is a tuple with a boolean for text coloring and the fitting outputtext
 get_frequentist_decision <- function(data, H0_p, significance_level) {
-  # binomial approximated by gauß
-
-  normal <- calc_normal_dist(data, H0_p)
-  n <- normal[1]
-  mu <- normal[2]
-  sigma_sq <- normal[3]
-
   # how many hits there actually are
-  actual <- sum(data[complete.cases(data)] == 1)
+  Tx <- hits_data(data)
+  n <- length(data)
 
+  # central limit theorem
   # calculate p-value
-  p_val <- round(pnorm(n + 0.5, mean = mu, sd = sigma_sq) - pnorm(actual - 0.5, mean = mu, sd = sigma_sq), digits = 2)
+  p_val <- round(2 * (1 - pnorm(abs((Tx - n * H0_p) / sqrt(n * H0_p * (1 - H0_p))), mean = 0, sd = 1)), digits = 2)
 
   decision <- ""
 
