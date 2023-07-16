@@ -1,8 +1,8 @@
-mP<- function(id) {
+mpageUI <- function(id) {
   ns <- NS(id)
   source("layout.R")
   library(shiny)
-  
+
   fluidPage(
     sidebarLayout(
       sidebarPanel(
