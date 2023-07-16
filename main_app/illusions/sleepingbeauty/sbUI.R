@@ -55,8 +55,6 @@ sbUI <- function(id) {
 
     # Page 2: Study procedure
     ###########################################################################
-    # Page 2: Study procedure
-    ###########################################################################
     conditionalPanel(
       condition = "input.sb_page2_button && !input.sb_page3_button",
       div(
@@ -122,7 +120,7 @@ sbUI <- function(id) {
           style = "text-align: center;", # Centering the button
           actionButton("sb_page3_button", "Put me to sleep",
             class = "btn-primary btn-lg",
-            style = "font-family: Helvetica; background-color: white; color: white; border: none; border-radius: 5px; padding: 10px 20px; cursor: pointer;"
+            style = "font-family: Helvetica; background-color: white; color: black; border-color : black; border-radius: 5px; padding: 10px 20px; cursor: pointer;"
           ) # Button to proceed to Page 3
         )
       )
@@ -161,7 +159,7 @@ sbUI <- function(id) {
       condition = "input.sb_page4_button && !input.sb_page5_button",
       div(
         style = "text-align: center; max-width: 500px; margin: 0 auto;",
-        h3("Now that you're awake, please answer the following question.",
+        h2("Now that you're awake, please answer the following question.",
           "It might be Monday or Tuesday, and you might have been awake the day before,",
           "but if you were, you don't remember what you said the first time.",
           style = "font-family: Helvetica; font-size: 20px; margin-bottom: 20px; margin-right: 20px;"
@@ -180,7 +178,7 @@ sbUI <- function(id) {
         ),
         actionButton("sb_page5_button", "Temporal Amnesia", # Button to proceed to page 5
           class = "email-button btn-primary btn-lg",
-          style = "font-family: Helvetica; background-color: white; border-color: white; color: black;"
+          style = "font-family: Helvetica; background-color: white; border-color: black; color: black;"
         )
       )
     ),
@@ -194,7 +192,7 @@ sbUI <- function(id) {
       p("Click on the button below if you're ready."),
       actionButton("sb_page6_button", "Next", # Button to proceed to page 6
         class = "btn-primary btn-lg",
-        style = "font-family: Helvetica; background-color: white; border-color: white; color: black;"
+        style = "font-family: Helvetica; background-color: white; border-color: black; color: black;"
       )
     ),
 
