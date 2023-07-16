@@ -1,24 +1,24 @@
 library(testthat)
 
-# Testing function create_test_data
-#-----------------------------------------
-test_that("create_test_data: 0 hits for", {
-  expect_true(create_test_data(3,0) = c(0,0,0))
-})
-test_that("create_test_data: 1 hits for", {
-  expect_true(create_test_data(2,0) = c(1,1))
-})
-test_that("create_test_data: number of hits", {
-  expect_true(create_test_data(3,1) = c(1,0,0))
-})
-#-----------------------------------------
-
 # For testing purposes create function to create known data
 create_test_data <- function(n, hits) {
   # Create a vector with the required number of 1s and 0s
-  data_vector <- c(rep(1, hits), rep(0, n-hits))
+  data_vector <- c(rep(1, hits), rep(0, n - hits))
   data_vector
 }
+
+# Testing function create_test_data
+#-----------------------------------------
+test_that("create_test_data: 0 hits for", {
+  expect_equal(create_test_data(3, 0), c(0, 0, 0))
+})
+test_that("create_test_data: 1 hits for", {
+  expect_equal(create_test_data(2, 2), c(1, 1))
+})
+test_that("create_test_data: number of hits", {
+  expect_equal(create_test_data(3, 1), c(1, 0, 0))
+})
+#-----------------------------------------
 
 # Create binomial distributed data
 # @param n: Sample size (Number of trials).
@@ -28,13 +28,6 @@ create_data <- function(n, p) {
   data
 }
 
-# Testing function hits_data
-#-----------------------------------------
-test_that("hits_data: number of hits", {
-  expect_true(hits_data(create_test_data(69,42)) = 42)
-})
-#-----------------------------------------
-
 # Count the hits for binomial distributed data
 # @param data: binomially distributed data
 hits_data <- function(data) {
@@ -42,21 +35,10 @@ hits_data <- function(data) {
   hits
 }
 
-# Testing function get_bayes_decision
+# Testing function hits_data
 #-----------------------------------------
-test_that("get_bayes_decision: reject when large disparity ", {
-  expect_true(!get_bayes_decision(create_test_data(69,0),0.99, TRUE)[1])
-})
-test_that("get_bayes_decision: accept when very similar", {
-  expect_true(get_bayes_decision(create_test_data(100,50),0.5, TRUE)[1])
-})
-
-
-test_that("get_bayes_decision: uninfo reject when large disparity ", {
-  expect_true(!get_bayes_decision(create_test_data(69,69),0.1, FALSE)[1])
-})
-test_that("get_bayes_decision: uninfo accept when H0 covers data", {
-  expect_true(get_bayes_decision(create_test_data(100,50),0.99, FALSE)[1])
+test_that("hits_data: number of hits", {
+  expect_equal(hits_data(create_test_data(69, 42)), 42)
 })
 #-----------------------------------------
 
@@ -82,24 +64,6 @@ get_bayes_decision <- function(data, H0_p, uninfo) {
 
   c(green_color, decision)
 }
-
-# Testing function get_H0_bayes
-#-----------------------------------------
-test_that("get_H0_bayes: 0 when large disparity ", {
-  expect_true(get_bayes_decision(create_test_data(69,0),1, TRUE) = 0)
-})
-test_that("get_H0_bayes: > 0.5 when very similar", {
-  expect_true(get_bayes_decision(create_test_data(100,50),0.5, TRUE) > 0.5)
-})
-
-test_that("get_H0_bayes: 0 when large disparity ", {
-  expect_true(get_bayes_decision(create_test_data(69,1),1, FALSE) = 1)
-})
-test_that("get_H0_bayes: > 0.5 when very similar", {
-  expect_true(get_bayes_decision(create_test_data(100,99),0.01, FALSE) = 0)
-})
-
-#-----------------------------------------
 
 # Calculates H1 for bayesian decision
 # H1 is either uniform or uniform H1: theta < H0_p depending on user choice
@@ -131,15 +95,38 @@ get_H0_bayes <- function(data, H0_p, uninfo) {
   p_H0_k
 }
 
-
-
-# Testing function get_frequentist_decision
+# Testing function get_bayes_decision
 #-----------------------------------------
-test_that("get_frequentist_decision: reject when large disparity ", {
-  expect_true(!get_frequentist_decision(create_test_data(69,0),0.99, TRUE)[1])
+test_that("get_bayes_decision: reject when large disparity ", {
+  expect_false(as.logical(get_bayes_decision(create_test_data(69, 1), 0.99, TRUE)[1]))
 })
-test_that("get_frequentist_decision: accept when very similar", {
-  expect_true(get_frequentist_decision(create_test_data(100,50),0.5, TRUE)[1])
+test_that("get_bayes_decision: accept when very similar", {
+  expect_true(as.logical(get_bayes_decision(create_test_data(100, 50), 0.5, TRUE)[1]))
+})
+
+test_that("get_bayes_decision: uninfo reject when large disparity ", {
+  expect_false(as.logical(get_bayes_decision(create_test_data(69, 69), 0.1, FALSE)[1]))
+})
+test_that("get_bayes_decision: uninfo accept when H0 covers data", {
+  expect_true(as.logical(get_bayes_decision(create_test_data(100, 50), 0.99, FALSE)[1]))
+})
+#-----------------------------------------
+
+
+# Testing function get_H0_bayes
+#-----------------------------------------
+test_that("get_H0_bayes: 0 when large disparity ", {
+  expect_equal(as.numeric(get_H0_bayes(create_test_data(69, 1), 1, TRUE)[1]), 0)
+})
+test_that("get_H0_bayes: > 0.5 when very similar", {
+  expect_true(get_H0_bayes(create_test_data(100, 50), 0.5, TRUE)[1] > 0.5)
+})
+
+test_that("get_H0_bayes: 0 when large disparity ", {
+  expect_equal(as.numeric(get_H0_bayes(create_test_data(69, 68), 0.001, FALSE)[1]), 0)
+})
+test_that("get_H0_bayes: > 0.5 when very similar", {
+  expect_true(get_H0_bayes(create_test_data(100, 50), 0.99, FALSE)[1] > 0.5)
 })
 
 #-----------------------------------------
@@ -171,6 +158,18 @@ get_frequentist_decision <- function(data, H0_p, significance_level) {
 
   c(green_color, decision)
 }
+
+# Testing function get_frequentist_decision
+#-----------------------------------------
+test_that("get_frequentist_decision: reject when large disparity ", {
+  expect_false(as.logical(get_frequentist_decision(create_test_data(69, 0), 0.99, TRUE)[1]))
+})
+test_that("get_frequentist_decision: accept when very similar", {
+  expect_true(as.logical(get_frequentist_decision(create_test_data(100, 50), 0.5, TRUE)[1]))
+})
+
+#-----------------------------------------
+
 
 plot_distributions <- function(n, p, data, H0_p, uninfo) {
   if (uninfo == TRUE) {
