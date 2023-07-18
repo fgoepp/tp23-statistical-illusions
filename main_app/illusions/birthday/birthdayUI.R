@@ -28,7 +28,6 @@ birthdayUI <- function(id) {
             "take your guess in percent",
             value = 0, min = 0, max = 100
           ),
-          HTML("%"),
         ),
         h3("Time flies by 30 people have left, 40 still remain "),
         br(),
@@ -39,7 +38,6 @@ birthdayUI <- function(id) {
             "take your guess in percent",
             value = 0, min = 0, max = 100
           ),
-          HTML("%"),
           actionButton("bday_page2_button", "Take Guess", )
         )
       )
