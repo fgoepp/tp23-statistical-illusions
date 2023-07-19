@@ -3,7 +3,9 @@
 
 
 # Introduction
-bla bli blup
+
+This repository is the result of our collaborative efforts as students participating in the Computer Science 4 team project. Its main purpose is to investigate paradoxes, fallacies, and challenges in probability theory, decision theory, and statistics. To enhance the experience, we have incorporated various illusions and implementations. It is worth mentioning that we utilized the R programming language and employed Shiny for the app app development. We invite you to explore this repository and witness the collective outcomes of our endeavors.
+
 # Getting Started
 
 ## 1. Installing R
@@ -32,11 +34,16 @@ bla bli blup
 - Select Local.
 - Click Download Zip.
 
-## 4. Open Repository in RStudio
-- Open RStudio
-- ......
-## 5. Installing packages for Illusion App
-- Open xxxx.R in RStudio
+## 4. Installing packages for Illusion App
+- Navigate to the repository folder on your device
+- Click `main_app` > `installation_sheet.R`
+- Open `installation_sheet.R` with RStudio
+- Click Run App
+
+## 5. Run App and enjoy exploring
+- Navigate to the repository folder on your device
+- Click `main_app` > `app.R`
+- Open `app.R` with RStudio
 - Click Run App
 
 # Adding your own Illusion
