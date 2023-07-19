@@ -5,6 +5,7 @@ source("illusions/birthday/birthdayUI.R")
 source("illusions/lindley/lindleyUI.R")
 source("illusions/sleepingbeauty/sbUI.R")
 source("illusions/gambler/gamblerUI.R")
+source("mainPage/mpageUI.R")
 
 ui <- dashboardPage(
   skin = "black",
@@ -64,7 +65,7 @@ ui <- dashboardPage(
         tabPanel(
           "Main Page",
           h4("Main Page"),
-          p("text/plot here pls ")
+          mpageUI("mainPage")
         )
       ),
 

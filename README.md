@@ -3,7 +3,9 @@
 
 
 # Introduction
-bla bli blup
+
+This repository is the result of our collaborative efforts as students participating in the Computer Science 4 team project. Its main purpose is to investigate paradoxes, fallacies, and challenges in probability theory, decision theory, and statistics. To enhance the experience, we have incorporated various illusions and implementations. It is worth mentioning that we utilized the R programming language and employed Shiny for the app app development. We invite you to explore this repository and witness the collective outcomes of our endeavors.
+
 # Getting Started
 
 ## 1. Installing R
@@ -32,11 +34,102 @@ bla bli blup
 - Select Local.
 - Click Download Zip.
 
-## 4. Open Repository in RStudio
-- Open RStudio
-- ......
-## 5. Installing packages for Illusion App
-- Open xxxx.R in RStudio
+## 4. Installing packages for Illusion App
+- Navigate to the repository folder on your device
+- Click `main_app` > `installation_sheet.R`
+- Open `installation_sheet.R` with RStudio
 - Click Run App
 
+## 5. Run App and enjoy exploring
+- Navigate to the repository folder on your device
+- Click `main_app` > `app.R`
+- Open `app.R` with RStudio
+- Click Run App
 
+# Adding your own Illusion
+
+## 1. Adding to UI
+Add your illusion to the `menuItem`
+```r
+# Illusions submenu
+menuItem(
+...
+menuSubItem(
+          "Your Illusion",
+          tabName = "your_illusion_tab",
+          icon = icon("chart-area")
+        ),
+expand = TRUE # Make the submenu expandable
+```
+Add your illusion to `tabItems`
+
+Be careful with the String in your UI. 
+This String should not be equal to any other String
+in the UIs.
+This is because of Modules in shiny.
+```r
+# Tab items
+tabItems(
+...
+      # Your Illusion tab item
+      tabItem(
+        tabName = "your_illusion_tab",
+        tabPanel(
+          "Your Illusion",
+          h4("Your Illusion"),
+          your_illusionUI("your_illusion")
+        )
+      ),
+```
+## 2. Adding your illusion to server
+add
+```r
+server <- function(input, output) {
+  birthdayServer("birthday")
+  lindleyServer("lindley")
+  sbServer("sleepingbeauty")
+  your_illusionServer("your_illusion")
+}
+```
+be careful that this String needs to be the same as in `your_illusionUI("your_illusion")`
+## 3. Adding your illusion modules
+now you need to create 2 `.R` files (your `server` and `ui` modules).
+As a convention we would recommend to add a new folder at
+`tp23-statistical-illusions\main_app\illusions`
+let's call it `your_illusion`. 
+Create 2 files called `your_illusionUI.R` and `your_illusionServer.R`. 
+
+In `your_illusionServer.R` add
+```r
+your_illusionServer <- function(id) {
+  moduleServer(id, function(input, output, session) {
+   
+  })
+}
+```
+
+and in `your_illusionUI.R` add (tagList is just a filler)
+```r
+your_illusionUI <- function(id) {
+  ns <- NS(id)
+  tagList(
+    h4("Your Illusion"),
+    p("This is the UI for Your Illusion tab.")
+  )
+}
+```
+you may want to use the layout, but you don't have to
+We recommend naming these methods this way so everyone knows what they do (for example in `ui.R` where you already added one of the methods we will add - `your_illusionUI("your_illusion")`).
+
+Be sure to add 
+```r
+source("illusions/your_illusion/your_illusionUI.R")
+```
+in the `ui.R`
+and 
+```r
+source("illusions/your_illusion/your_illusionServer.R")
+```
+in the server
+
+Here you go! Have fun creating and adding your own illusion page. Feel free to customize your UI and Server modules according to your needs. Enjoy exploring new illusions and expanding the possibilities of the app!
