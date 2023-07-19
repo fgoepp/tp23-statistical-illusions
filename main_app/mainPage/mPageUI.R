@@ -8,7 +8,7 @@ mpageUI <- function(id) {
       sidebarPanel(
         # Introduction section
         h2("Welcome to the Statistical Illusions App!"),
-        p("Explore paradoxes, fallacies and problems in probability and decision theory and statistics."),
+        p("Explore paradoxes, fallacies, problems in probability theory, decision theory and statistics."),
         p("Discover how intuitions about randomness and probability can sometimes mislead us."),
         p("Let's dive in and challenge your perception of probability!")
       ),
