@@ -124,3 +124,5 @@ and
 source("illusions/your_illusion/your_illusionServer.R")
 ```
 in the server
+
+Here you go! Have fun creating and adding your own illusion page. Feel free to customize your UI and Server modules according to your needs. Enjoy exploring new illusions and expanding the possibilities of the app!
