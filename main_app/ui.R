@@ -4,6 +4,7 @@ library(shinydashboard)
 source("illusions/birthday/birthdayUI.R")
 source("illusions/lindley/lindleyUI.R")
 source("illusions/sleepingbeauty/sbUI.R")
+source("illusions/gambler/gamblerUI.R")
 source("mainPage/mpageUI.R")
 
 ui <- dashboardPage(
@@ -74,7 +75,7 @@ ui <- dashboardPage(
         tabPanel(
           "Monte Carlo Fallacy",
           h4("Monte Carlo Fallacy"),
-          p("text/plot here pls ")
+          gamblerUI("gambler")
         )
       ),
 
