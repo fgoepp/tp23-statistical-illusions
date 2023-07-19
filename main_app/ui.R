@@ -4,24 +4,25 @@ library(shinydashboard)
 source("illusions/birthday/birthdayUI.R")
 source("illusions/lindley/lindleyUI.R")
 source("illusions/sleepingbeauty/sbUI.R")
+source("illusions/gambler/gamblerUI.R")
 
 ui <- dashboardPage(
   skin = "black",
-  
+
   # Header
   dashboardHeader(
     title = "?"
   ),
-  
+
   # Sidebar
   dashboardSidebar(
-    
+
     # Sidebar menu
     sidebarMenu(
-      
+
       # Sidebar menu items
       menuItem("MainPage", tabName = "main_tab", icon = icon("home")),
-      
+
       # Illusions submenu
       menuItem(
         "Illusions",
@@ -50,13 +51,13 @@ ui <- dashboardPage(
       )
     )
   ),
-  
+
   # Body
   dashboardBody(
-    
+
     # Tab items
     tabItems(
-      
+
       # Main tab item
       tabItem(
         tabName = "main_tab",
@@ -66,17 +67,17 @@ ui <- dashboardPage(
           p("text/plot here pls ")
         )
       ),
-      
+
       # Monte Carlo Fallacy tab item
       tabItem(
         tabName = "mc_fallacy_tab",
         tabPanel(
           "Monte Carlo Fallacy",
           h4("Monte Carlo Fallacy"),
-          p("text/plot here pls ")
+          gamblerUI("gambler")
         )
       ),
-      
+
       # Birthday Problem tab item
       tabItem(
         tabName = "birthday_tab",
@@ -86,7 +87,7 @@ ui <- dashboardPage(
           birthdayUI("birthday")
         )
       ),
-      
+
       # Sleeping Beauty Problem tab item
       tabItem(
         tabName = "sleeping_tab",
@@ -107,4 +108,3 @@ ui <- dashboardPage(
     )
   )
 )
-
