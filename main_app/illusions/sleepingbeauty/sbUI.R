@@ -1,9 +1,9 @@
 sbUI <- function(id) {
   ns <- NS(id)
   source("layout.R")
-
+  
   fluidPage(
-
+    
     # Page 1: Email describing the experiment
     ###########################################################################
     conditionalPanel(
@@ -46,13 +46,13 @@ sbUI <- function(id) {
             actionButton(
               "sb_page2_button", "Participate",
               class = "email-button btn-primary btn-lg",
-              style = "font-family: Helvetica; background-color: white; border-color: white; color: black;"
+              style = "font-family: Helvetica; background-color: white; border-color: #4e79a7; color: black;"
             )
           )
         )
       )
     ),
-
+    
     # Page 2: Study procedure
     ###########################################################################
     conditionalPanel(
@@ -60,9 +60,7 @@ sbUI <- function(id) {
       div(
         class = "page-container",
         style = "background-color: #FFFAFA; padding: 30px; border-radius: 10px; box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);",
-        h2("Welcome, Sleeping Beauty",
-          style = "text-align: center; font-family: Helvetica; color: black; font-size: 28px; margin-bottom: 20px;"
-        ),
+        h2("Welcome, Sleeping Beauty", style = "text-align: center; font-family: Helvetica; color: black; font-size: 28px; margin-bottom: 20px;"),
         p("Great that you made it! Let's walk through the details of the study.",
           style = "color: black; font-size: 20px; text-align: center; margin-bottom: 30px;"
         ),
@@ -82,47 +80,42 @@ sbUI <- function(id) {
           style = "font-size: 20px; font-family: Helvetica; margin-bottom: 15px;"
         ),
         p("Your goal is to maximize your accuracy in predicting the coin flip outcome.",
-          style = "font-size: 20px; font-family: Helvetica; margin-bottom: 30px;"
+          style = "font-size: 20px; font-family: Helvetica; margin-bottom: 15px;"
         ),
-        h3("Timetable:",
-          style = "font-family: Helvetica; font-size: 24px; margin-bottom: 10px;"
-        ),
+        h3("Timetable:"),
         fluidRow(
           column(4,
-            align = "center", style = "font-size: 20px; font-family: Helvetica;",
-            h4("Outcome of the Coin Flip"),
-            div(
-              style = "border: 1px solid #ddd; border-radius: 4px; padding: 10px; background-color: #f9f9f9;",
-              p("Head", style = "margin: 0;"), p("Tail", style = "margin: 0;")
-            )
+                 align = "center", style = "font-size: 20px; font-family: Helvetica;",
+                 h4("Outcome of the Coin Flip"),
+                 div(
+                   style = "border: 1px solid #ddd; border-radius: 4px; padding: 10px; background-color: #f9f9f9;",
+                   p("Head", style = "margin: 0;"), p("Tail", style = "margin: 0;")
+                 )
           ),
           column(4,
-            align = "center", style = "font-size: 20px; font-family: Helvetica;",
-            h4("Monday"),
-            div(
-              style = "border: 1px solid #ddd; border-radius: 4px; padding: 10px; background-color: #f9f9f9;",
-              p("Awake", style = "margin: 0;"), p("Awake", style = "margin: 0;")
-            )
+                 align = "center", style = "font-size: 20px; font-family: Helvetica;",
+                 h4("Monday"),
+                 div(
+                   style = "border: 1px solid #ddd; border-radius: 4px; padding: 10px; background-color: #f9f9f9;",
+                   p("Awake", style = "margin: 0;"), p("Awake", style = "margin: 0;")
+                 )
           ),
           column(4,
-            align = "center", style = "font-size: 20px; font-family: Helvetica;",
-            h4("Tuesday"),
-            div(
-              style = "border: 1px solid #ddd; border-radius: 4px; padding: 10px; background-color: #f9f9f9;",
-              p("Asleep", style = "margin: 0;"), p("Awake", style = "margin: 0;")
-            )
+                 align = "center", style = "font-size: 20px; font-family: Helvetica;",
+                 h4("Tuesday"),
+                 div(
+                   style = "border: 1px solid #ddd; border-radius: 4px; padding: 10px; background-color: #f9f9f9;",
+                   p("Asleep", style = "margin: 0;"), p("Awake", style = "margin: 0;")
+                 )
           )
         ),
         p("Click the button below when you're ready to go to sleep.",
           style = "font-size: 16px; font-family: Helvetica; margin-top: 30px; text-align: center;"
         ),
-        div(
-          style = "text-align: center;", # Centering the button
-          actionButton("sb_page3_button", "Put me to sleep",
-            class = "btn-primary btn-lg",
-            style = "font-family: Helvetica; background-color: white; color: black; border-color : black; border-radius: 5px; padding: 10px 20px; cursor: pointer;"
-          ) # Button to proceed to Page 3
-        )
+        actionButton("sb_page3_button", "Put me to sleep",
+                     class = "btn-primary btn-lg",
+                     style = "font-family: Helvetica; background-color: #C0C0C0; border-color: #808080; display: block; margin: 0 auto;"
+        ) # Button to proceed to Page 3
       )
     ),
     # Page 3: Coin flip
@@ -135,6 +128,7 @@ sbUI <- function(id) {
           controls = "controls",
           style = "max-width: 100%;",
           tags$source(src = "cointoss.mp4", type = "video/mp4"),
+          autoplay = TRUE,
           loop = TRUE
         ),
         tags$p(
@@ -157,45 +151,30 @@ sbUI <- function(id) {
     ###### Page 4: You're awake and have to answer a question
     conditionalPanel(
       condition = "input.sb_page4_button && !input.sb_page5_button",
-      div(
-        style = "text-align: center; max-width: 500px; margin: 0 auto;",
-        h2("Now that you're awake, please answer the following question.",
-          "It might be Monday or Tuesday, and you might have been awake the day before,",
-          "but if you were, you don't remember what you said the first time.",
-          style = "font-family: Helvetica; font-size: 20px; margin-bottom: 20px; margin-right: 20px;"
-        ),
-        div(
-          style = "margin: 0 auto; max-width: 300px; display: flex; flex-direction: column; align-items: center;", # Centering the textInput
-          div(
-            style = "margin-bottom: 15px;",
-            HTML('<p style="font-family: Helvetica; font-size: 16px; margin: 0;">What is the probability that the coin came up heads?</p>')
-          ),
-          HTML('<input type="text" id="answer" placeholder="Enter your answer"
-            style="width: 100%; padding: 10px; font-family: Helvetica; font-size: 16px; border: 1px solid #ccc; border-radius: 5px;">')
-        ),
-        p("When you click on the button below, you will experience temporal amnesia.",
-          style = "font-family: Helvetica; font-size: 12px; margin-bottom: 35px;"
-        ),
-        actionButton("sb_page5_button", "Temporal Amnesia", # Button to proceed to page 5
-          class = "email-button btn-primary btn-lg",
-          style = "font-family: Helvetica; background-color: white; border-color: black; color: black;"
-        )
+      h2("Now that you're awake, please answer the following question,
+         again, it might be Monday or Thursday and you might have been awake the day before,
+         but if you were, you don't remember what you said the first time"),
+      textInput(
+        "answer",
+        "What is the probability that the coin came up heads?",
+        value = ""
+      ),
+      actionButton("sb_page5_button", "Temporal Amnesia", # Button to proceed to page 5
+                   class = "btn-primary btn-lg",
+                   style = "font-family: Helvetica; background-color: white; border-color: #4e79a7; color: black;"
       )
     ),
-
+    
     ###### Page 5: End of the Experiment, thanks for the participation
     conditionalPanel(
       condition = "input.sb_page5_button > 0",
       h2("End of Experiment"),
       p("Thank you for your participation!"),
-      p("The experiment is now over, but we would like to ask you to answer another question on the next page for the collection of statistical data."),
-      p("Click on the button below if you're ready."),
-      actionButton("sb_page6_button", "Next", # Button to proceed to page 6
-        class = "btn-primary btn-lg",
-        style = "font-family: Helvetica; background-color: white; border-color: black; color: black;"
+      actionButton("sb_page6_button", "Next Page", # Button to proceed to page 6
+                   class = "btn-primary btn-lg",
+                   style = "font-family: Helvetica; background-color: white; border-color: #4e79a7; color: black;"
       )
     ),
-
     ###### Page 6: Now that the Experiment ended, choose again
     conditionalPanel(
       condition = "input.sb_page6_button",
@@ -204,7 +183,7 @@ sbUI <- function(id) {
         "answer",
         label = NULL,
         choices = c(
-          "The probability that the coin came up heads is 2/3",
+          "The probability that the coin came up heads is 1/3",
           "The probability that the coin came up heads is 1/2"
         ),
         selected = character(0)
@@ -214,7 +193,7 @@ sbUI <- function(id) {
         # Page 7: You chose 1/3
         ###########################################################################
         conditionalPanel(
-          condition = "input.answer == 'The probability that the coin came up heads is 2/3'",
+          condition = "input.answer == 'The probability that the coin came up heads is 1/3'",
           h2("Are you sure about that?"),
           p(tags$span(style = "font-size: larger;", "From my perspective, as an advocate of David Lewis's viewpoint on the Sleeping Beauty problem, ")),
           p(tags$span(style = "font-size: larger;", "I believe that the widely accepted 1/3 approach is flawed.")),
@@ -229,80 +208,74 @@ sbUI <- function(id) {
           p(tags$span(style = "font-size: larger;", "However, I respectfully disagree with this line of reasoning. ")),
           p(tags$span(style = "font-size: larger;", "From my personal standpoint, I must take into account the inherent uncertainty that arises due to my limited self-location knowledge. ")),
           p(tags$span(style = "font-size: larger;", "I am aware that I have been awakened at least once, but I lack direct observational evidence about the exact number of awakenings. ")),
-          p(tags$span(style = "font-size: larger;", "If the coin indeed landed on heads, ")),
-          p(tags$span(style = "font-size: larger;", "I would only experience a single awakening. ")),
-          p(tags$span(style = "font-size: larger;", "On the other hand, if it landed on tails, ")),
-          p(tags$span(style = "font-size: larger;", "I would experience two awakenings. ")),
-          p(tags$span(style = "font-size: larger;", "This means that there are two possible scenarios where I find myself awakened twice: Heads-Tails and Tails-Heads. ")),
-          p(tags$span(style = "font-size: larger;", "In contrast, there is only one scenario where I experience a single awakening: Heads-Heads. ")),
-          p(tags$span(style = "font-size: larger;", "Considering this, I find it appropriate to assign a higher probability to the coin landing on heads. ")),
-          p(tags$span(style = "font-size: larger;", "To be precise, I believe that there is a 2/3 chance that the coin landed on heads.")),
-          radioButtons(
-            "page7_option",
-            "Make your final choice:",
-            choices = c(
-              "The probability that the coin came up heads is 1/3",
-              "The probability that the coin came up heads is 1/2"
-            ),
-            selected = character(0)
+          p(tags$span(style = "font-size: larger;", "This leads to my assumption, that the probability that the coin came up heads")),
+          p(tags$span(style = "font-size: larger;", "has to be 1/2 because it's a fair coin that was flipped and the probbility of this possible outcome has to be 1/2")),
+                      radioButtons(
+                        "page7_option",
+                        "Make your final choice:",
+                        choices = c(
+                          "The probability that the coin came up heads is 1/3",
+                          "The probability that the coin came up heads is 1/2"
+                        ),
+                        selected = character(0)
+                      ),
+                      br(),
+                      actionButton("sb_page7_button", "Lock In",
+                                   class = "btn-primary btn-lg",
+                                   style = "font-family: Helvetica; background-color: white; border-color: #4e79a7; color: black;"
+                      ), # Button to lock in the answer from Page 7
+                      # Page 9: The final page where the explanation text is added if you lock in 1/3
+                      ###########################################################################
+                      conditionalPanel(
+                        condition = "input.sb_page7_button > 0",
+                        h2("Text"),
+                        p("Final page, locked in on the David Lewis site.")
+                      )
           ),
-          br(),
-          actionButton("sb_page7_button", "Lock In",
-            class = "btn-primary btn-lg",
-            style = "font-family: Helvetica; background-color: white; border-color: white; color: black;"
-          ), # Button to lock in the answer from Page 7
-          # Page 9: The final page where the explanation text is added if you lock in 1/3
+          # Page 8: You chose that the probability is 1/2
           ###########################################################################
           conditionalPanel(
-            condition = "input.sb_page7_button > 0",
-            h2("Text"),
-            p("Final page, locked in on the David Lewis site.")
+            condition = "input.answer == 'The probability that the coin came up heads is 1/2'",
+            h2("Are you sure about that?"),
+            p(tags$span(style = "font-size: larger;", "If you believe that the probability in the Sleeping Beauty problem that heads came up is 1/2,")),
+            p(tags$span(style = "font-size: larger;", "I understand your perspective. However, based on my understanding of the problem")),
+            p(tags$span(style = "font-size: larger;", "and the position I advocate, known as the thirder position, I would argue differently.")),
+            p(tags$span(style = "font-size: larger;", "In the thirder position,")),
+            p(tags$span(style = "font-size: larger;", "I assign a probability of 1/3 to the event that heads came up.")),
+            p(tags$span(style = "font-size: larger;", "This view takes into account the two different experiences that Sleeping Beauty")),
+            p(tags$span(style = "font-size: larger;", "undergoes during the experiment: one when she wakes up on Monday and another")),
+            p(tags$span(style = "font-size: larger;", "when she wakes up on Tuesday. Each experience should be given equal weight when determining probabilities.")),
+            p(tags$span(style = "font-size: larger;", "While it may seem intuitive to assign a 1/2 probability,")),
+            p(tags$span(style = "font-size: larger;", "considering that heads and tails are equally likely outcomes in a fair coin toss,")),
+            p(tags$span(style = "font-size: larger;", "the introduction of multiple observations and experiences changes the dynamics")),
+            p(tags$span(style = "font-size: larger;", "of the problem. The thirder position seeks to incorporate these")),
+            p(tags$span(style = "font-size: larger;", "additional factors into the probability assessment.")),
+            p(tags$span(style = "font-size: larger;", "If you think you're still right, lock in your choice,")),
+            p(tags$span(style = "font-size: larger;", "but you can still change your opinion.")),
+            p(tags$span(style = "font-size: larger;", "Adam Elga.")),
+            radioButtons(
+              "page6_option",
+              "Make your final choice:",
+              choices = c(
+                "The probability that the coin came up heads is 1/3",
+                "The probability that the coin came up heads is 1/2"
+              ),
+              selected = character(0)
+            ),
+            br(),
+            actionButton("sb_page8_button", "Lock In",
+                         class = "btn-primary btn-lg",
+                         style = "font-family: Helvetica; background-color: white; border-color: #4e79a7; color: black;"
+            ), # Button to lock in the answer from Page 6
+            # Page 10: The final Page where the explanation Text is added locked in 1/2
+            ###########################################################################
+            conditionalPanel(
+              condition = "input.sb_page8_button > 0",
+              h2("Text"),
+              p("Final site locked in on the Adam Elga site.")
+            )
           )
-        ),
-        # Page 8: You chose that the probability is 1/2
-        ###########################################################################
-        conditionalPanel(
-          condition = "input.answer == 'The probability that the coin came up heads is 1/2'",
-          h2("Are you sure about that?"),
-          p(tags$span(style = "font-size: larger;", "If you believe that the probability in the Sleeping Beauty problem that heads came up is 1/2,")),
-          p(tags$span(style = "font-size: larger;", "I understand your perspective. However, based on my understanding of the problem")),
-          p(tags$span(style = "font-size: larger;", "and the position I advocate, known as the thirder position, I would argue differently.")),
-          p(tags$span(style = "font-size: larger;", "In the thirder position,")),
-          p(tags$span(style = "font-size: larger;", "I assign a probability of 1/3 to the event that heads came up.")),
-          p(tags$span(style = "font-size: larger;", "This view takes into account the two different experiences that Sleeping Beauty")),
-          p(tags$span(style = "font-size: larger;", "undergoes during the experiment: one when she wakes up on Monday and another")),
-          p(tags$span(style = "font-size: larger;", "when she wakes up on Tuesday. Each experience should be given equal weight when determining probabilities.")),
-          p(tags$span(style = "font-size: larger;", "While it may seem intuitive to assign a 1/2 probability,")),
-          p(tags$span(style = "font-size: larger;", "considering that heads and tails are equally likely outcomes in a fair coin toss,")),
-          p(tags$span(style = "font-size: larger;", "the introduction of multiple observations and experiences changes the dynamics")),
-          p(tags$span(style = "font-size: larger;", "of the problem. The thirder position seeks to incorporate these")),
-          p(tags$span(style = "font-size: larger;", "additional factors into the probability assessment.")),
-          p(tags$span(style = "font-size: larger;", "If you think you're still right, lock in your choice,")),
-          p(tags$span(style = "font-size: larger;", "but you can still change your opinion.")),
-          p(tags$span(style = "font-size: larger;", "Adam Elga.")),
-          radioButtons(
-            "page6_option",
-            "Make your final choice:",
-            choices = c(
-              "The probability that the coin came up heads is 1/3",
-              "The probability that the coin came up heads is 1/2"
-            ),
-            selected = character(0)
-          ),
-          br(),
-          actionButton("sb_page8_button", "Lock In",
-            class = "btn-primary btn-lg",
-            style = "font-family: Helvetica; background-color: white; border-color: #4e79a7; color: black;"
-          ), # Button to lock in the answer from Page 6
-          # Page 10: The final Page where the explanation Text is added locked in 1/2
-          ###########################################################################
-          conditionalPanel(
-            condition = "input.sb_page8_button > 0",
-            h2("Text"),
-            p("Final site locked in on the Adam Elga site.")
           )
         )
       )
-    )
-  )
 }
