@@ -1,7 +1,7 @@
 gamblerUI <- function(id) {
   ns <- NS(id)
 
-  library(beepr)
+  library(ggplot2)
   library(shinyWidgets)
   library(shinyjs)
 
