@@ -79,8 +79,8 @@ gamblerServer <- function(id) {
     output$prior_plot <- renderPlot({
       # Creating the Data
       prior <- c(c(
-        "p₀", "p₁"
-      ), c("p₀", "p₁"))
+        "p0", "p1"
+      ), c("p0", "p1"))
 
       prior_situations <- c(
         c(
