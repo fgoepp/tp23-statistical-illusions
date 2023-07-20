@@ -31,17 +31,17 @@ gamblerUI <- function(id) {
           p("We will now throw the same fair coin another time."),
           p("How likely is the outcome 'heads'?"),
           fluidRow(
-            column(
-              width = 1,
+            column(1,
+              align = "center", style = "font-size: 20px; font-family: Helvetica;",
               div(
                 style = "border: 1px solid #ddd; border-radius: 4px; padding: 10px; background-color: #f9f9f9;",
                 p("100x", style = "padding:20px;")
               )
             ),
-            column(
-              width = 1,
+            column(1,
+              align = "center", style = "font-size: 20px; font-family: Helvetica;",
               div(
-                style = "border: 1px solid #ddd; border-radius: 4px; padding: 0px; background-color: #f9f9f9;",
+                style = "border: 1px solid #ddd; border-radius: 4px; padding: 10px; background-color: #f9f9f9;",
                 icon(
                   name = NULL,
                   style = "
@@ -56,8 +56,8 @@ gamblerUI <- function(id) {
                 )
               )
             ),
-            column(
-              width = 2, offset = 1,
+            column(1,
+              align = "center", style = "font-size: 20px; font-family: Helvetica;",
               div(
                 style = "border: 1px solid #ddd; border-radius: 4px; padding: 10px; background-color: #f9f9f9;",
                 radioButtons(
@@ -67,8 +67,8 @@ gamblerUI <- function(id) {
                 )
               )
             ),
-            column(
-              width = 6, offset = 1,
+            column(9,
+              align = "center", style = "font-size: 20px; font-family: Helvetica;",
               div(
                 style = "border: 1px solid #ddd; border-radius: 4px; padding: 10px; background-color: #f9f9f9;",
                 conditionalPanel(
@@ -114,7 +114,7 @@ gamblerUI <- function(id) {
                   style = "padding:20px;"
                 )
               )
-            )
+            ),
           )
         ),
         conditionalPanel(
@@ -127,17 +127,17 @@ gamblerUI <- function(id) {
               p("We will now throw the same D6 again."),
               p("How likely is the event '6'?"),
               fluidRow(
-                column(
-                  width = 1,
+                column(1,
+                  align = "center", style = "font-size: 20px; font-family: Helvetica;",
                   div(
                     style = "border: 1px solid #ddd; border-radius: 4px; padding: 10px; background-color: #f9f9f9;",
                     p("100x", style = "padding:20px;")
                   )
                 ),
-                column(
-                  width = 1,
+                column(1,
+                  align = "center", style = "font-size: 20px; font-family: Helvetica;",
                   div(
-                    style = "border: 1px solid #ddd; border-radius: 4px; padding: 0px; background-color: #f9f9f9;",
+                    style = "border: 1px solid #ddd; border-radius: 4px; padding: 10px; background-color: #f9f9f9;",
                     icon(
                       name = NULL,
                       style = "
@@ -152,8 +152,8 @@ gamblerUI <- function(id) {
                     )
                   )
                 ),
-                column(
-                  width = 2, offset = 1,
+                column(1,
+                  align = "center", style = "font-size: 20px; font-family: Helvetica;",
                   div(
                     style = "border: 1px solid #ddd; border-radius: 4px; padding: 10px; background-color: #f9f9f9;",
                     radioButtons(
@@ -163,8 +163,8 @@ gamblerUI <- function(id) {
                     )
                   )
                 ),
-                column(
-                  width = 6, offset = 1,
+                column(9,
+                  align = "center", style = "font-size: 20px; font-family: Helvetica;",
                   div(
                     style = "border: 1px solid #ddd; border-radius: 4px; padding: 10px; background-color: #f9f9f9;",
                     conditionalPanel(
@@ -222,7 +222,7 @@ gamblerUI <- function(id) {
                       )
                     )
                   )
-                )
+                ),
               )
             )
           )
