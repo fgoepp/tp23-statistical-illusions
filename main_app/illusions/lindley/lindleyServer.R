@@ -12,15 +12,6 @@ lindleyServer <- function(id) {
       input$p / 100
     })
 
-    observe({
-      if (uninfo() == TRUE) {
-        # Change the maximum value of the slider of H0_p as it's a one sided test
-        updateSliderInput(session, "H0_p", max = input$p)
-      } else {
-        updateSliderInput(session, "H0_p", max = 100)
-      }
-    })
-
     # to access option val init
     uninfo <- reactiveVal(TRUE)
 
@@ -31,7 +22,7 @@ lindleyServer <- function(id) {
 
     observe({
       option_value <- selected_option()
-      if (option_value == "Uniform") {
+      if (option_value == "H₀ Gauß & H₁ Uniform") {
         uninfo(TRUE)
       } else {
         uninfo(FALSE)
