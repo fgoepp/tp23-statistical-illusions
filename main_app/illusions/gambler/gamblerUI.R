@@ -10,12 +10,12 @@ gamblerUI <- function(id) {
     # page 1
     tabPanel("Introduction",
       value = "panel1",
-      h4("Welcome fellow gambler."),
-      p("This subsection of the app concerns itself with the gambler's fallacy."),
-      p("The intended experience is to go through the app chronologically, since the tabPanels will appear one after another."),
+      h2("Welcome fellow gambler."),
+      h3("This subsection of the app concerns itself with the gambler's fallacy."),
+      h3("The intended experience is to go through the app chronologically, since the tabPanels will appear one after another."),
       conditionalPanel(
         condition = "input.gambler_first_page_button == 0 & input.gambler_unlock_first_page == 0",
-        p("If you are ready to continue, please press the button below to advance."),
+        h4("If you are ready to continue, please press the button below to advance."),
         actionButton("gambler_first_page_button", "unlock Multiple Choice")
       )
     ),
@@ -27,9 +27,9 @@ gamblerUI <- function(id) {
       conditionalPanel(
         condition = ("input.gambler_first_page_button >= 1 | input.gambler_unlock_first_page >= 1"),
         verticalLayout(
-          p("The former events are noted on the left hand side."),
-          p("We will now throw the same fair coin another time."),
-          p("How likely is the outcome 'heads'?"),
+          h3("The former events are noted on the left hand side."),
+          h3("We will now throw the same fair coin another time."),
+          h3("How likely is the outcome 'heads'?"),
           fluidRow(
             column(1,
               align = "center", style = "font-size: 20px; font-family: Helvetica;",
@@ -123,9 +123,9 @@ gamblerUI <- function(id) {
           conditionalPanel(
             condition = "input.gambler_im_sure_button",
             verticalLayout(
-              p("Again, the former events are noted on the left hand side."),
-              p("We will now throw the same D6 again."),
-              p("How likely is the event '6'?"),
+              h3("Again, the former events are noted on the left hand side."),
+              h3("We will now throw the same D6 again."),
+              h3("How likely is the event '6'?"),
               fluidRow(
                 column(1,
                   align = "center", style = "font-size: 20px; font-family: Helvetica;",
@@ -253,8 +253,8 @@ gamblerUI <- function(id) {
           sliderInput(ns("second_prior_probability"), "probability of the event stated by the alternative H1", min = 0, max = 100, value = 0)
         ),
         mainPanel(
-          p("The plot showcases how the likelihood of an event being fair shifts depending on several parameters."),
-          p("It displays the odds for Hypothesis0 -the event is fair- and Hypothesis1 -the event isn't fair-"),
+          h4("The plot showcases how the likelihood of an event being fair shifts depending on several parameters."),
+          h4("It displays the odds for Hypothesis0 -the event is fair- and Hypothesis1 -the event isn't fair-"),
           plotOutput(ns("prior_plot")),
           textOutput(ns("rounded_to_0_txt")),
           conditionalPanel(
