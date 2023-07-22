@@ -170,15 +170,32 @@ test_that("get_frequentist_decision: accept when very similar", {
 #-----------------------------------------
 
 
-plot_distributions <- function(n, p, data, H0_p, uninfo) {
+plot_distributions <- function(n, p, data, H0_p, uninfo, significance_level) {
   if (uninfo == TRUE) {
-    return(plot_distributions_normal(n, p, data, H0_p))
+    return(plot_distributions_normal(n, p, data, H0_p, significance_level))
   } else {
-    return(plot_distributions_uninfo(n, p, data, H0_p))
+    return(plot_distributions_uninfo(n, p, data, H0_p, significance_level))
   }
 }
 
-plot_distributions_normal <- function(n, p, data, H0_p) {
+plot_distributions_normal <- function(n, p, data, H0_p, significance_level) {
+  plot_gauß_unif(n, p, data, H0_p, significance_level)
+
+  # add explanation of distributions
+  legend("topleft",
+    legend = c(
+      "Actual data",
+      "critical area",
+      bquote("H"[0] ~ "of Bayesian & Frequentist"),
+      bquote("H"[1] ~ "of Bayesian")
+    ),
+    col = c("grey", "grey", "red", "green"), lty = c(1, 2, 1, 1), lwd = 1,
+    x.intersp = 0.5,
+    xpd = FALSE
+  )
+}
+
+plot_gauß_unif <- function(n, p, data, H0_p, significance_level) {
   # specify what x-Axis
   x <- round(seq(0, n, length.out = 1000))
   # load normal dist
@@ -208,51 +225,53 @@ plot_distributions_normal <- function(n, p, data, H0_p) {
   points(data_x, data_y_norm, col = "purple", pch = 16)
   points(data_x, data_y_unif, col = "purple", pch = 16)
 
-  # add explanation of distributions
-  legend("topleft",
-    legend = c(
-      "Actual data",
-      bquote("Predicted by H"[0]),
-      bquote("H"[1] ~ "of Bayesian")
-    ),
-    col = c("grey", "red", "green"), lwd = 1
-  )
+  # plot critical area
+  crit <- critical_area(n, significance_level, H0_p)
+  k_left <- crit[1]
+  k_right <- crit[2]
+
+  data_x <- c(k_left, k_left)
+  data_y <- c(0, 1)
+  lines(data_x, data_y, col = "grey", lwd = 2, lty = 2)
+
+  data_x <- c(k_right, k_right)
+  data_y <- c(0, 1)
+  lines(data_x, data_y, col = "grey", lwd = 2, lty = 2)
 }
 
-plot_distributions_uninfo <- function(n, p, data, H0_p) {
-  # specify what x-Axis
-  x <- round(seq(0, n, length.out = 1000))
+# Calculates cricical area
+# @param n: |samples|.
+# @param H0_p: The p chosen by the user.
+# @param significance_level: The significance level chosen by the user.
+# @output is a tuple with critical area left and right
+critical_area <- function(n, significance_level, H0_p) {
+  k_left <- n * H0_p + qnorm(significance_level / 2, mean = 0, sd = 1) * sqrt(n * H0_p * (1 - H0_p))
+  k_right <- n * H0_p + qnorm(1 - significance_level / 2, mean = 0, sd = 1) * sqrt(n * H0_p * (1 - H0_p))
+  c(k_left, k_right)
+}
 
-  # H0 uniform to H0_p
-  H_plot <- dunif(x, min = 0, max = n)
-
-  plot(x, H_plot, type = "l", ylim = c(0, max(H_plot) * 10), xlab = "x", ylab = "Density", col = "red")
+plot_distributions_uninfo <- function(n, p, data, H0_p, significance_level) {
+  plot_gauß_unif(n, p, data, H0_p, significance_level)
 
   # Define the start and end positions of the line
   start <- c(H0_p * n, 0)
-  end <- c(H0_p * n, max(H_plot))
+  end <- c(H0_p * n, 1 / (n + 1))
 
   # Draw the perpendicular line
   lines(c(start[1], end[1]), c(start[2], end[2]), col = "green", lwd = 5)
 
-  # Plot the data
-  data_x <- c(hits_data(data), hits_data(data))
-  data_y <- c(0, 1)
-  lines(data_x, data_y, col = "grey", lwd = 2)
-
-  # Add points representing the data where it crosses both distributions
-  data_x <- hits_data(data)
-  data_y_unif <- dunif(data_x, min = 0, max = n)
-  points(data_x, data_y_unif, col = "purple", pch = 16)
-
   # add explanation of distributions
   legend("topleft",
     legend = c(
       "Actual data",
-      bquote("Predicted by H"[0]),
-      bquote("H"[1] ~ "of Bayesian")
+      "critical area",
+      bquote("Baysian H"[0] ~ "lesser p"[0]),
+      bquote("Baysian H"[1] ~ "greater p"[0]),
+      "Frequentist"
     ),
-    col = c("blue", "red", "green"), lwd = 1
+    col = c("grey", "grey", "green", "green", "red"), lty = c(1, 2, 1, 1, 1), lwd = 1,
+    x.intersp = 0.5,
+    xpd = FALSE
   )
 }
 
