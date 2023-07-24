@@ -191,7 +191,9 @@ plot_distributions_normal <- function(n, p, data, H0_p, significance_level) {
     ),
     col = c("grey", "grey", "red", "green"), lty = c(1, 2, 1, 1), lwd = 1,
     x.intersp = 0.5,
-    xpd = FALSE
+    xpd = FALSE,
+    bty = "n",
+    cex = 0.9
   )
 }
 
@@ -271,7 +273,9 @@ plot_distributions_uninfo <- function(n, p, data, H0_p, significance_level) {
     ),
     col = c("grey", "grey", "green", "green", "red"), lty = c(1, 2, 1, 1, 1), lwd = 1,
     x.intersp = 0.5,
-    xpd = FALSE
+    xpd = FALSE,
+    bty = "n",
+    cex = 0.9
   )
 }
 
