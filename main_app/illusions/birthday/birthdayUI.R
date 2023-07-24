@@ -79,19 +79,7 @@ birthdayUI <- function(id) {
               tags$span(textOutput(ns("text_instruction_sliders")), class = "instruction"),
               tags$span(textOutput(ns("text_instruction_goback")), class = "instruction"),
               br(),
-              HTML("<h4>History</h4>"),
-              a(href = "https://github.com/fgoepp/tp23-statistical-illusions", "Our Github"),
-              a(
-                href = "https://github.com/fgoepp/tp23-statistical-illusions",
-                style = "color: blue; text-decoration: underline;",
-                "https://github.com/fgoepp/tp23-statistical-illusions"
-              ),
-              div(
-                HTML("This is the summation symbol: $$\\sum_{i=1}^{n} i$$"),
-                HTML("This is the product symbol: $$\\prod_{i=1}^{n} x_i$$"),
-                HTML("Here is something under the square root: $$\\sqrt{4x^{7}}$$"),
-                HTML("Here is an integral with a sine function: $$\\int_{a}^{b} \\sin(x) \\, dx$$")
-              )
+              tags$iframe(style = "height: 400px; width: 100%; scrolling = yes", src = "testpdf.pdf")
             )
           )
         )
