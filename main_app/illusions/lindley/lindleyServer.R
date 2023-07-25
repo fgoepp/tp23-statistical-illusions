@@ -60,7 +60,7 @@ lindleyServer <- function(id) {
 
     # Plot the data and the distributions
     output$plot <- renderPlot({
-      plot_distributions(input$n, p(), data(), H0_p(), uninfo())
+      plot_distributions(input$n, p(), data(), H0_p(), uninfo(), significance_level())
     })
 
     # Explain text
