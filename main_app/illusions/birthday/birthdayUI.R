@@ -55,7 +55,7 @@ birthdayUI <- function(id) {
             selectInput(
               ns("category_selector"),
               label = "Example category: ",
-              choices = c("birthday in a year", "favourite planet of our solarsystem", "favorite element of the periodic table"),
+              choices = c("birthday in a year", "star sign", "favourite planet of our solarsystem", "favorite element of the periodic table"),
               selected = "birthday in a year"
             ),
             br()

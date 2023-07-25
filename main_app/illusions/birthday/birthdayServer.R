@@ -17,6 +17,8 @@ birthdayServer <- function(id) {
     observeEvent(input$category_selector, {
       if (input$category_selector == "birthday in a year") {
         updateSliderInput(session, "c", value = 365, max = 400)
+      } else if (input$category_selector == "star sign") {
+        updateSliderInput(session, "c", value = 12, max = 400)
       } else if (input$category_selector == "favourite planet of our solarsystem") {
         updateSliderInput(session, "c", value = 8, max = 400)
       } else if (input$category_selector == "favorite element of the periodic table") {
