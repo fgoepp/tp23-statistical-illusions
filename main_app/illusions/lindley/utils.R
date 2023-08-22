@@ -55,10 +55,10 @@ get_bayes_decision <- function(data, H0_p, uninfo) {
   green_color <- FALSE
 
   if (p_H0_k > 0.5) {
-    decision <- paste("Baysian: H₀ more likely -> keep H₀ ", "P(H₀) ", p_H0_k)
+    decision <- paste("Baysian: H₀ more likely -> keep H₀ ", "P(H₀)= ", p_H0_k)
     green_color <- TRUE
   } else {
-    decision <- paste("Baysian: H₁ more likely -> reject H₀ ", "P(H₀) ", p_H0_k)
+    decision <- paste("Baysian: H₁ more likely -> reject H₀ ", "P(H₀)= ", p_H0_k)
   }
 
   c(green_color, decision)
