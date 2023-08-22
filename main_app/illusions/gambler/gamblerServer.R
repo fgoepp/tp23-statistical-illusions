@@ -1,7 +1,6 @@
 gamblerServer <- function(id) {
   moduleServer(id, function(input, output, session) {
     library(shinyjs)
-    # for round i believe
     library(scales)
 
     observeEvent(input$reset_to_fairness, {
