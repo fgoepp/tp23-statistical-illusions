@@ -29,8 +29,8 @@ ui <- dashboardPage(
         "Illusions",
         icon = icon("eye"),
         menuSubItem(
-          "Monte Carlo Fallacy",
-          tabName = "mc_fallacy_tab",
+          "Gambler's fallacy",
+          tabName = "gambler_fallacy_tab",
           icon = icon("dice")
         ),
         menuSubItem(
@@ -71,10 +71,9 @@ ui <- dashboardPage(
 
       # Monte Carlo Fallacy tab item
       tabItem(
-        tabName = "mc_fallacy_tab",
+        tabName = "gambler_fallacy_tab",
         tabPanel(
-          "Monte Carlo Fallacy",
-          h4("Monte Carlo Fallacy"),
+          "Gambler's Fallacy",
           gamblerUI("gambler")
         )
       ),

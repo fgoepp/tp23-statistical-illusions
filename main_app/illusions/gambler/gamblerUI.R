@@ -5,7 +5,7 @@ gamblerUI <- function(id) {
   library(shinyWidgets)
   library(shinyjs)
 
-  navbarPage("Navigation Bar",
+  navbarPage("Gambler's fallacy",
     id = "inTabset",
     # page 1
     tabPanel("Introduction",
