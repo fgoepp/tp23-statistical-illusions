@@ -21,7 +21,6 @@ gamblerUI <- function(id) {
     ),
 
     # page 2
-    # icons from iconpacks.net (no credit required)
     tabPanel("Multiple Choice",
       value = "panel2",
       conditionalPanel(
@@ -59,10 +58,10 @@ gamblerUI <- function(id) {
             column(1,
               align = "center", style = "font-size: 20px; font-family: Helvetica;",
               div(
-                style = "border: 1px solid #ddd; border-radius: 4px; padding: 10px; background-color: #f9f9f9;",
+                style = "border: 1px solid #ddd; border-radius: 4px; padding: 40px; background-color: #f9f9f9;",
                 radioButtons(
                   "guess_flip", "",
-                  c("<50%" = "3", "50%" = "1", ">50%" = "2"),
+                  c("<50%" = "3", " 50%" = "1", ">50%" = "2"),
                   selected = character(0)
                 )
               )
@@ -155,7 +154,7 @@ gamblerUI <- function(id) {
                 column(1,
                   align = "center", style = "font-size: 20px; font-family: Helvetica;",
                   div(
-                    style = "border: 1px solid #ddd; border-radius: 4px; padding: 10px; background-color: #f9f9f9;",
+                    style = "border: 1px solid #ddd; border-radius: 4px; padding: 40px; background-color: #f9f9f9;",
                     radioButtons(
                       "guess_dice", "",
                       c("<1/6" = "1", "1/6" = "3", ">1/6" = "2"),
@@ -254,7 +253,7 @@ gamblerUI <- function(id) {
         ),
         mainPanel(
           h4("The plot showcases how the likelihood of an event being fair shifts depending on several parameters."),
-          h4("It displays the odds for Hypothesis0 -the event is fair- and Hypothesis1 -the event isn't fair-"),
+          h4(HTML(paste0("It displays the odds for H", tags$sub("0"), " - the event is fair - and H", tags$sub("1"), " - the event isn't fair -."))),
           plotOutput(ns("prior_plot")),
           textOutput(ns("rounded_to_0_txt")),
           conditionalPanel(
