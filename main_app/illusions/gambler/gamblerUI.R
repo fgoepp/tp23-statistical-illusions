@@ -274,7 +274,10 @@ gamblerUI <- function(id) {
       value = "panel4",
       conditionalPanel(
         condition = "input.gambler_third_page_button >= 1| input.gambler_unlock_third_page >= 1",
-        p("Hier wird Geschichte geschrieben!")
+        tags$iframe(
+          style = "height:400px; width:100%; scrolling=yes",
+          src = "gambler_history.pdf"
+        )
       ),
       # brute unlock page 3
       conditionalPanel(
