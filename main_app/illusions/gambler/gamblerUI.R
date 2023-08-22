@@ -246,10 +246,10 @@ gamblerUI <- function(id) {
             choices = c("Sixes for a dice", "Heads for a coin"),
             selected = "Sixes for a dice"
           ),
-          sliderInput(ns("likeliness_fair"), "prior p0 likelihood in %:", min = 0, max = 100, value = 50),
+          sliderInput(ns("likeliness_fair"), HTML(paste0("prior p", tags$sub("0"), " likelihood in %:")), min = 0, max = 100, value = 50),
           actionButton(ns("reset_to_fairness"), "Set to absolute fairness"),
           sliderInput(ns("streak_length:"), "length of the streak of events:", min = 1, max = 20, value = 5),
-          sliderInput(ns("second_prior_probability"), "probability of the event stated by the alternative H1", min = 0, max = 100, value = 0)
+          sliderInput(ns("second_prior_probability"), HTML(paste0("probability of the event stated by the alternative H", tags$sub("1"))), min = 0, max = 100, value = 0)
         ),
         mainPanel(
           h4("The plot showcases how the likelihood of an event being fair shifts depending on several parameters."),

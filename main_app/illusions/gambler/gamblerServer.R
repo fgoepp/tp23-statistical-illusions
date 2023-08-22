@@ -78,6 +78,8 @@ gamblerServer <- function(id) {
     # Plotting the Data in ggplot2
     output$prior_plot <- renderPlot({
       # Creating the Data
+      prior_ID <- c(c(1, 1), c(2, 2))
+
       prior <- c(c(
         "p0", "p1"
       ), c("p0", "p1"))
@@ -96,12 +98,14 @@ gamblerServer <- function(id) {
       )
 
       # Passing the Data to DataFrame
-      prior_Data <- data.frame(prior, prior_situations, prior_odds)
+      prior_Data <- data.frame(prior_situations, prior, prior_odds, prior_ID)
       ######
       ggplot(prior_Data, aes(
-        x = prior_situations, y = prior_odds,
+        x = reorder(prior_situations, +prior_ID), y = prior_odds,
         fill = prior, label = prior_odds
       ), ylim = 1) +
+        ylab("probability") +
+        xlab("likelihoods of the hypotheses") +
         geom_bar(stat = "identity") +
         geom_text(
           size = 3, position = position_stack(vjust = 0.5)
