@@ -84,6 +84,9 @@ sbUI <- function(id) {
         p("Your goal is to maximize your accuracy in predicting the coin flip outcome.",
           style = "font-size: 20px; font-family: Helvetica; margin-bottom: 30px;"
         ),
+        p("Underneath you can see the timetable of the awakenings in both scenarios.",
+          style = "font-size: 20px; font-family: Helvetica; margin-bottom: 30px;"
+        ),
         h3("Timetable:",
           style = "font-family: Helvetica; font-size: 24px; margin-bottom: 10px;"
         ),
@@ -134,8 +137,7 @@ sbUI <- function(id) {
         tags$video(
           controls = "controls",
           style = "max-width: 100%;",
-          tags$source(src = "cointoss.mp4", type = "video/mp4"),
-          loop = TRUE
+          tags$source(src = "cointoss.mp4", type = "video/mp4")
         ),
         tags$p(
           style = "position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%); color: #FFFFFF;
@@ -199,7 +201,7 @@ sbUI <- function(id) {
     ###### Page 6: Now that the Experiment ended, choose again
     conditionalPanel(
       condition = "input.sb_page6_button",
-      h2("What do you think now is the probability that the coin came up heads?"),
+      h2("If you put yourself back into the situation to answer the question after being woken up, what would you reply?"),
       radioButtons(
         "answer",
         label = NULL,
