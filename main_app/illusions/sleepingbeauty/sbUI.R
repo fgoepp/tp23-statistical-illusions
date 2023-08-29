@@ -1,6 +1,7 @@
 sbUI <- function(id) {
   ns <- NS(id)
   source("layout.R")
+  # file where the texts displayed in the app are stored
   source("illusions/sleepingbeauty/sbText.R")
 
   fluidPage(
@@ -64,7 +65,7 @@ sbUI <- function(id) {
         h2("Welcome, Sleeping Beauty",
           style = "text-align: center; font-family: Helvetica; color: black; font-size: 28px; margin-bottom: 20px;"
         ),
-        Timetable_Description,
+        timetable_Description,
         h3("Timetable:",
           style = "font-family: Helvetica; font-size: 24px; margin-bottom: 10px;"
         ),
@@ -171,7 +172,7 @@ sbUI <- function(id) {
         conditionalPanel(
           condition = "input.answer == 'The probability that the coin came up heads is 1/3'",
           h2("Are you sure about that?"),
-          David_Lewis,
+          david_Lewis_text,
           radioButtons(
             "page7_option",
             "Make your final choice:",
@@ -199,7 +200,7 @@ sbUI <- function(id) {
         conditionalPanel(
           condition = "input.answer == 'The probability that the coin came up heads is 1/2'",
           h2("Are you sure about that?"),
-          Text1,
+          adam_Elga_text,
           radioButtons(
             "page6_option",
             "Make your final choice:",
