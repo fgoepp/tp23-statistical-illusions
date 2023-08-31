@@ -191,8 +191,7 @@ sbUI <- function(id) {
           ###########################################################################
           conditionalPanel(
             condition = "input.sb_page7_button > 0",
-            h2("Text"),
-            p("Final page, locked in on the David Lewis site.")
+            tags$iframe(style = "height:400px; width:800px;", src = "sb_text.pdf")
           )
         ),
         # Page 8: You chose that the probability is 1/2
@@ -219,8 +218,7 @@ sbUI <- function(id) {
           ###########################################################################
           conditionalPanel(
             condition = "input.sb_page8_button > 0",
-            h2("Text"),
-            p("Final site locked in on the Adam Elga site.")
+            tags$iframe(style = "height:400px; width:800px;", src = "sb_text.pdf")
           )
         )
       )
