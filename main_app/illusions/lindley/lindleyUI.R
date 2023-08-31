@@ -30,8 +30,9 @@ lindleyUI <- function(id) {
     plotOutput(ns("plot")),
     uiOutput(ns("frequentist_decision")),
     uiOutput(ns("bayesian_decision")),
-    HTML("<h4>History</h4>"),
-    textOutput(ns("text_description"))
+    # HTML("<h4>History</h4>"),
+    # textOutput(ns("text_description"))
+    tags$iframe(style = "height:800px; width:100%; scrolling=yes", src = "lindley.pdf")
   )
 
   # load layout
