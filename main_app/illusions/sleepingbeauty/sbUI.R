@@ -191,7 +191,13 @@ sbUI <- function(id) {
           ###########################################################################
           conditionalPanel(
             condition = "input.sb_page7_button > 0",
-            tags$iframe(style = "height:400px; width:800px;", src = "sb_text.pdf")
+            tags$div(
+              style = "display: flex; justify-content: center; align-items: center; height: 80vh;",
+              tags$iframe(
+                style = "width: 100%; height:100%;",
+                src = "sb_text.pdf"
+              )
+            )
           )
         ),
         # Page 8: You chose that the probability is 1/2
@@ -218,7 +224,13 @@ sbUI <- function(id) {
           ###########################################################################
           conditionalPanel(
             condition = "input.sb_page8_button > 0",
-            tags$iframe(style = "height:400px; width:800px;", src = "sb_text.pdf")
+            tags$div(
+              style = "display: flex; justify-content: center; align-items: center; height: 80vh;",
+              tags$iframe(
+                style = "width: 100%; height:100%;",
+                src = "sb_text.pdf"
+              )
+            )
           )
         )
       )
