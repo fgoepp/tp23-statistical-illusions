@@ -5,7 +5,7 @@ gamblerUI <- function(id) {
   library(shinyWidgets)
   library(shinyjs)
 
-  navbarPage("Navigation Bar",
+  navbarPage("Gambler's fallacy",
     id = "inTabset",
     # page 1
     tabPanel("Introduction",
@@ -21,7 +21,6 @@ gamblerUI <- function(id) {
     ),
 
     # page 2
-    # icons from iconpacks.net (no credit required)
     tabPanel("Multiple Choice",
       value = "panel2",
       conditionalPanel(
@@ -59,10 +58,10 @@ gamblerUI <- function(id) {
             column(1,
               align = "center", style = "font-size: 20px; font-family: Helvetica;",
               div(
-                style = "border: 1px solid #ddd; border-radius: 4px; padding: 10px; background-color: #f9f9f9;",
+                style = "border: 1px solid #ddd; border-radius: 4px; padding: 40px; background-color: #f9f9f9;",
                 radioButtons(
                   "guess_flip", "",
-                  c("<50%" = "3", "50%" = "1", ">50%" = "2"),
+                  c("<50%" = "3", " 50%" = "1", ">50%" = "2"),
                   selected = character(0)
                 )
               )
@@ -155,7 +154,7 @@ gamblerUI <- function(id) {
                 column(1,
                   align = "center", style = "font-size: 20px; font-family: Helvetica;",
                   div(
-                    style = "border: 1px solid #ddd; border-radius: 4px; padding: 10px; background-color: #f9f9f9;",
+                    style = "border: 1px solid #ddd; border-radius: 4px; padding: 40px; background-color: #f9f9f9;",
                     radioButtons(
                       "guess_dice", "",
                       c("<1/6" = "1", "1/6" = "3", ">1/6" = "2"),
@@ -247,14 +246,14 @@ gamblerUI <- function(id) {
             choices = c("Sixes for a dice", "Heads for a coin"),
             selected = "Sixes for a dice"
           ),
-          sliderInput(ns("likeliness_fair"), "prior p0 likelihood in %:", min = 0, max = 100, value = 50),
+          sliderInput(ns("likeliness_fair"), HTML(paste0("prior p", tags$sub("0"), " likelihood in %:")), min = 0, max = 100, value = 50),
           actionButton(ns("reset_to_fairness"), "Set to absolute fairness"),
           sliderInput(ns("streak_length:"), "length of the streak of events:", min = 1, max = 20, value = 5),
-          sliderInput(ns("second_prior_probability"), "probability of the event stated by the alternative H1", min = 0, max = 100, value = 0)
+          sliderInput(ns("second_prior_probability"), HTML(paste0("probability of the event stated by the alternative H", tags$sub("1"))), min = 0, max = 100, value = 0)
         ),
         mainPanel(
           h4("The plot showcases how the likelihood of an event being fair shifts depending on several parameters."),
-          h4("It displays the odds for Hypothesis0 -the event is fair- and Hypothesis1 -the event isn't fair-"),
+          h4(HTML(paste0("It displays the odds for H", tags$sub("0"), " - the event is fair - and H", tags$sub("1"), " - the event isn't fair -."))),
           plotOutput(ns("prior_plot")),
           textOutput(ns("rounded_to_0_txt")),
           conditionalPanel(
@@ -275,7 +274,10 @@ gamblerUI <- function(id) {
       value = "panel4",
       conditionalPanel(
         condition = "input.gambler_third_page_button >= 1| input.gambler_unlock_third_page >= 1",
-        p("Hier wird Geschichte geschrieben!")
+        tags$iframe(
+          style = "height:400px; width:100%; scrolling=yes",
+          src = "gambler_history.pdf"
+        )
       ),
       # brute unlock page 3
       conditionalPanel(
